@@ -105,7 +105,15 @@ extension SceneDelegate: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    // 에플 로그인 - 필요한 window 객체 제공
+    // 화면 전환 메서드 -> ClosetViewController
+    func switchToCloset() {
+        let closetVC = ClosetViewController()
+        let navigationController = UINavigationController(rootViewController: closetVC)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+    }
+    
+    // 애플 로그인 - 필요한 window 객체 제공
     func getPresentationAnchor() -> ASPresentationAnchor {
         guard let window = window else {
             fatalError("Window is not available")
@@ -113,3 +121,4 @@ extension SceneDelegate: Coordinator {
         return window
     }
 }
+

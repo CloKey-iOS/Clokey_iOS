@@ -15,8 +15,6 @@
 		070258B42D3107C900065369 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B32D3107C900065369 /* CalendarViewController.swift */; };
 		070258B82D31083D00065369 /* AddClothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B72D31083D00065369 /* AddClothView.swift */; };
 		070258BA2D31084300065369 /* AddClothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B92D31084300065369 /* AddClothViewController.swift */; };
-		070258BE2D31085900065369 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BD2D31085900065369 /* ClosetView.swift */; };
-		070258C02D31086A00065369 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BF2D31086A00065369 /* ClosetViewController.swift */; };
 		070258C42D31088300065369 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258C32D31088300065369 /* ProfileViewController.swift */; };
 		070258C82D31089300065369 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258C72D31089300065369 /* ProfileView.swift */; };
 		076FAB1D2D2E5DD800FF3979 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 076FAB1C2D2E5DD800FF3979 /* Then */; };
@@ -55,10 +53,6 @@
 		07E1CB602D36A10000F86BB8 /* CustomButtonTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1CB5E2D36A10000F86BB8 /* CustomButtonTextField.swift */; };
 		07E1CB662D36A63200F86BB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1CB652D36A63200F86BB8 /* ViewController.swift */; };
 		07E1CB682D36B47C00F86BB8 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E1CB672D36B47C00F86BB8 /* MainViewModel.swift */; };
-		1E401EAA2D3D1E3E00563363 /* ClosetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E401EA92D3D1E3E00563363 /* ClosetCollectionViewCell.swift */; };
-		1E401EAC2D3D1E5100563363 /* ClosetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E401EAB2D3D1E5100563363 /* ClosetModel.swift */; };
-		1E40209A2D3ECB9E00563363 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4020992D3ECB9E00563363 /* PopUpView.swift */; };
-		1E4020F42D3EDC3400563363 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E4020F32D3EDC3400563363 /* CategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,8 +65,6 @@
 		070258B32D3107C900065369 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		070258B72D31083D00065369 /* AddClothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothView.swift; sourceTree = "<group>"; };
 		070258B92D31084300065369 /* AddClothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothViewController.swift; sourceTree = "<group>"; };
-		070258BD2D31085900065369 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
-		070258BF2D31086A00065369 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
 		070258C32D31088300065369 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		070258C72D31089300065369 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		076FAB2F2D2E6E0200FF3979 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,11 +96,30 @@
 		07E1CB652D36A63200F86BB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		07E1CB672D36B47C00F86BB8 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		07F093102D2418380075659F /* Clokey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clokey.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1E401EA92D3D1E3E00563363 /* ClosetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetCollectionViewCell.swift; sourceTree = "<group>"; };
-		1E401EAB2D3D1E5100563363 /* ClosetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetModel.swift; sourceTree = "<group>"; };
-		1E4020992D3ECB9E00563363 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
-		1E4020F32D3EDC3400563363 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1E40215C2D4215FE00563363 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		1E40215D2D42161100563363 /* CollectionView */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		1E4021622D42167900563363 /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1E4021632D42169000563363 /* ViewController */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		07F0930D2D2418380075659F /* Frameworks */ = {
@@ -172,12 +183,10 @@
 		070258A82D31074100065369 /* Closet */ = {
 			isa = PBXGroup;
 			children = (
-				070258BD2D31085900065369 /* ClosetView.swift */,
-				1E401EA92D3D1E3E00563363 /* ClosetCollectionViewCell.swift */,
-				1E4020992D3ECB9E00563363 /* PopUpView.swift */,
-				1E401EAB2D3D1E5100563363 /* ClosetModel.swift */,
-				1E4020F32D3EDC3400563363 /* CategoryView.swift */,
-				070258BF2D31086A00065369 /* ClosetViewController.swift */,
+				1E40215C2D4215FE00563363 /* View */,
+				1E40215D2D42161100563363 /* CollectionView */,
+				1E4021632D42169000563363 /* ViewController */,
+				1E4021622D42167900563363 /* Model */,
 			);
 			path = Closet;
 			sourceTree = "<group>";
@@ -358,6 +367,12 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				1E40215C2D4215FE00563363 /* View */,
+				1E40215D2D42161100563363 /* CollectionView */,
+				1E4021622D42167900563363 /* Model */,
+				1E4021632D42169000563363 /* ViewController */,
+			);
 			name = Clokey;
 			packageProductDependencies = (
 				076FAB1C2D2E5DD800FF3979 /* Then */,
@@ -442,12 +457,9 @@
 			files = (
 				070258AC2D31079B00065369 /* HomeView.swift in Sources */,
 				070258B02D3107B200065369 /* HomeViewModel.swift in Sources */,
-				070258BE2D31085900065369 /* ClosetView.swift in Sources */,
 				070258B22D3107C200065369 /* CalendarView.swift in Sources */,
 				076FAB4E2D2EBB3A00FF3979 /* KakaoAuthService.swift in Sources */,
 				070258A32D30FEC700065369 /* MainView.swift in Sources */,
-				1E4020F42D3EDC3400563363 /* CategoryView.swift in Sources */,
-				070258C02D31086A00065369 /* ClosetViewController.swift in Sources */,
 				07E1CB682D36B47C00F86BB8 /* MainViewModel.swift in Sources */,
 				076FAB3F2D2E6E0200FF3979 /* AppDelegate.swift in Sources */,
 				07E1CB4B2D3668CE00F86BB8 /* Constants.swift in Sources */,
@@ -455,11 +467,8 @@
 				07E1CB5F2D36A10000F86BB8 /* CustomButton.swift in Sources */,
 				07E1CB602D36A10000F86BB8 /* CustomButtonTextField.swift in Sources */,
 				07E1CB662D36A63200F86BB8 /* ViewController.swift in Sources */,
-				1E401EAA2D3D1E3E00563363 /* ClosetCollectionViewCell.swift in Sources */,
-				1E40209A2D3ECB9E00563363 /* PopUpView.swift in Sources */,
 				07E1CB472D3662EC00F86BB8 /* UIColor+Extension.swift in Sources */,
 				07E1CB482D3662EC00F86BB8 /* UIImage+Extensions.swift in Sources */,
-				1E401EAC2D3D1E5100563363 /* ClosetModel.swift in Sources */,
 				07E1CB442D3662D900F86BB8 /* UIFont+Extensions.swift in Sources */,
 				07E1CB582D3679A800F86BB8 /* CustomTextField.swift in Sources */,
 				070258BA2D31084300065369 /* AddClothViewController.swift in Sources */,
