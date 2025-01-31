@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 앱이 처음 실행될 때 호출되는 메서드
         
-        // 카카오 SDK 초기화
+        //₩ 카카오 SDK 초기화
         if let appKey = Bundle.main.object(forInfoDictionaryKey: "KAKAO_NATIVE_APP_KEY") as? String {
                print("Kakao App Key: \(appKey)") // 디버그용
                KakaoSDK.initSDK(appKey: appKey)

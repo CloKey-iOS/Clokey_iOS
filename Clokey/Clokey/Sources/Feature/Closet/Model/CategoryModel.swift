@@ -10,6 +10,7 @@ struct CategoryModel {
             return CategoryModel(
                 name: "상의",
                 buttons: ["티셔츠", "니트/스웨터", "맨투맨", "후드티", "셔츠/블라우스", "반팔티", "나시", "기타"]
+                
             )
         case 2:
             return CategoryModel(

@@ -42,11 +42,11 @@ class SegmentIntegrationView: UIView {
             $0.selectedSegmentIndex = 0
             $0.setTitleTextAttributes([
                 NSAttributedString.Key.foregroundColor: UIColor.black,
-                .font: UIFont.systemFont(ofSize: 18, weight: .light)
+                .font: UIFont.ptdLightFont(ofSize: 18)
             ], for: .normal)
             $0.setTitleTextAttributes([
                 NSAttributedString.Key.foregroundColor: UIColor.black,
-                .font: UIFont.systemFont(ofSize: 18, weight: .bold)
+                .font: UIFont.ptdBoldFont(ofSize: 18)
             ], for: .selected)
             $0.apportionsSegmentWidthsByContent = false
         }
@@ -92,7 +92,7 @@ class SegmentIntegrationView: UIView {
         indicatorBar.snp.makeConstraints { make in
             make.width.equalTo(44)
             make.height.equalTo(3)
-            make.bottom.equalTo(divideLine.snp.top).offset(-1)
+            make.bottom.equalTo(segmentedControl.snp.bottom).offset(2)
             make.leading.equalTo(divideLine.snp.leading)
         }
         
@@ -105,7 +105,7 @@ class SegmentIntegrationView: UIView {
         categoryButtonStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(29)
-            make.centerY.equalToSuperview()
+            make.top.equalTo(categoryScrollView.snp.top).offset(10)
         }
     }
     
@@ -115,7 +115,7 @@ class SegmentIntegrationView: UIView {
     }
     //다른 세그먼트들은 (상의, 기타, 전체, 하의) 2글자인데, 아우터는 3글자임 그 pt 차이가 15여서 index == 3을 15만큼 더 길이를 늘림
     private func adjustSegmentWidths() {
-        let totalWidth = frame.width - 42 // SegmentIntegrationView의 leading 간격 반영
+        let totalWidth = frame.width - 40 // SegmentIntegrationView의 leading 간격 반영
         let additionalWidth: CGFloat = 15 // 추가 너비
         let baseWidth = (totalWidth - additionalWidth) / 5 // 기본 세그먼트 너비
 
@@ -134,7 +134,7 @@ class SegmentIntegrationView: UIView {
     func updateIndicatorPosition(for index: Int) {
         guard frame.width > 0 else { return }
 
-        let totalWidth = frame.width - 42
+        let totalWidth = frame.width - 40
         let additionalWidth: CGFloat = 15
         let baseWidth = (totalWidth - additionalWidth) / 5
 
@@ -144,14 +144,14 @@ class SegmentIntegrationView: UIView {
         }
 
         let selectedSegmentWidth = (index == 3) ? (baseWidth + additionalWidth) : baseWidth
-        let indicatorBarLeading = cumulativeWidth + (selectedSegmentWidth / 2) - 22 // Indicator 중심 계산
+        let indicatorBarLeading = cumulativeWidth + (selectedSegmentWidth / 2) - 23 // Indicator 중심 계산
 
         UIView.animate(withDuration: 0.3) {
             self.indicatorBar.snp.remakeConstraints { make in
                 make.leading.equalTo(self.segmentedControl.snp.leading).offset(indicatorBarLeading)
                 make.width.equalTo(44)
                 make.height.equalTo(3)
-                make.bottom.equalTo(self.divideLine.snp.top).offset(-2)
+                make.bottom.equalTo(self.segmentedControl.snp.bottom).offset(2)
             }
             self.layoutIfNeeded()
         }
@@ -159,25 +159,39 @@ class SegmentIntegrationView: UIView {
 
     //(각세그먼트 눌렀을때 기존 카테고리 버튼은 초기화하고 새로운 세그먼트에 맞는 버튼을 띄움)
     func updateCategories(for categories: [String]) {
+        // 기존 버튼 제거
         categoryButtonStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         categories.forEach { category in
             let button = UIButton().then {
-                $0.setTitle(category, for: .normal)
-                $0.setTitleColor(.black, for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
                 var configuration = UIButton.Configuration.filled()
+                
+                // 타이틀 설정
+                configuration.title = category
+                configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
+                    var outgoing = incoming
+                    outgoing.font = UIFont.ptdRegularFont(ofSize: 16)
+                    return outgoing
+                }
+                
+                // UI 속성 설정
                 configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 14, bottom: 5, trailing: 14)
                 configuration.baseBackgroundColor = .white
                 configuration.baseForegroundColor = .black
+
+                // 버튼 적용
                 $0.configuration = configuration
                 $0.layer.borderColor = UIColor(named: "pointOrange800")?.cgColor
                 $0.layer.borderWidth = 1.0
                 $0.layer.cornerRadius = 15
                 $0.clipsToBounds = true
             }
+            
+            // StackView에 추가
             categoryButtonStackView.addArrangedSubview(button)
+            
         }
+
 
         let totalWidth = categoryButtonStackView.arrangedSubviews.reduce(0) { $0 + $1.intrinsicContentSize.width + 16 }
         categoryScrollView.contentSize = CGSize(width: totalWidth, height: categoryScrollView.frame.height)
