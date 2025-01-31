@@ -4,7 +4,14 @@ import Then
 
 final class ClosetView: UIView {
     // MARK: - UI Components
-    let segmentIntegrationView = SegmentIntegrationView(items: ["전체", "상의", "하의", "아우터", "기타"])
+    let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+        $0.alwaysBounceVertical = true
+    }
+    
+    let contentView = UIView() // ScrollView 내부를 감싸는 View
+
+    let customTotalSegmentView = CustomTotalSegmentView(items: ["전체", "상의", "하의", "아우터", "기타"])
 
     let closetCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.estimatedItemSize = .init(width: 111, height: 167)
@@ -12,7 +19,7 @@ final class ClosetView: UIView {
         $0.minimumLineSpacing = 20
     }).then {
         $0.backgroundColor = .clear
-        $0.isScrollEnabled = false
+        $0.isScrollEnabled = false // 스크롤뷰 내에서 개별 스크롤 방지
         $0.register(ClosetCollectionViewCell.self, forCellWithReuseIdentifier: ClosetCollectionViewCell.identifier)
     }
 
@@ -20,9 +27,15 @@ final class ClosetView: UIView {
         $0.setTitle("전체보기", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.ptdRegularFont(ofSize: 12)
+        $0.contentHorizontalAlignment = .left//text 왼쪽 정렬
     }
-
-    // 🔹 배너를 담을 ScrollView 추가 (사용자가 직접 넘기는 방식)
+        
+    let frontIconView = UIImageView().then{
+        $0.image = UIImage(named: "front_icon")
+        $0.tintColor = UIColor(named: "mainBrown800")
+        $0.contentMode = .scaleAspectFit
+    }
+        
     let bannerScrollView = UIScrollView().then {
         $0.isPagingEnabled = true
         $0.showsHorizontalScrollIndicator = false
@@ -40,14 +53,31 @@ final class ClosetView: UIView {
     let pageControl = UIPageControl().then {
         $0.numberOfPages = 2
         $0.currentPage = 0
-        $0.pageIndicatorTintColor = .lightGray
-        $0.currentPageIndicatorTintColor = UIColor(named: "pointOrange800")
+        $0.pageIndicatorTintColor = UIColor(named: "textGray400")
+        $0.currentPageIndicatorTintColor = UIColor(named: "textGray600")
     }
 
     let drawerTitle = UILabel().then {
         $0.text = "서랍"
         $0.font = UIFont.ptdSemiBoldFont(ofSize: 20)
         $0.textColor = .black
+    }
+    
+    let optionButton = UIButton().then{
+        $0.setImage(UIImage(named: "dot3_icon"), for: .normal)
+        $0.tintColor = UIColor.mainBrown800
+        $0.imageView?.contentMode = .scaleAspectFit
+    }
+    
+    let drawerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.estimatedItemSize = .init(width: 173, height: 77)
+        $0.minimumInteritemSpacing = 7
+        $0.minimumLineSpacing = 12
+    }).then {
+        $0.backgroundColor = .clear
+        $0.layer.cornerRadius = 10
+        $0.showsHorizontalScrollIndicator = false
+        $0.register(DrawerCollectionViewCell.self, forCellWithReuseIdentifier: DrawerCollectionViewCell.identifier)
     }
 
     // MARK: - Init
@@ -65,13 +95,17 @@ final class ClosetView: UIView {
     // MARK: - Setup UI and Constraints
     private func setupUI() {
         backgroundColor = .white
-        addSubview(segmentIntegrationView)
-        addSubview(bannerScrollView)
-        addSubview(pageControl)
-        addSubview(closetCollectionView)
-        addSubview(seeAllButton)
-        addSubview(drawerTitle)
-
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(customTotalSegmentView)
+        contentView.addSubview(bannerScrollView)
+        contentView.addSubview(pageControl)
+        contentView.addSubview(closetCollectionView)
+        contentView.addSubview(seeAllButton)
+        contentView.addSubview(frontIconView)
+        contentView.addSubview(drawerTitle)
+        contentView.addSubview(optionButton)
+        contentView.addSubview(drawerCollectionView)
         // 배너 추가
         bannerScrollView.addSubview(bannerStackView)
         let banner1 = ArrangeClosetBannerView()
@@ -81,37 +115,53 @@ final class ClosetView: UIView {
     }
 
     private func setupConstraints() {
-        segmentIntegrationView.snp.makeConstraints { make in
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()// 가로 스크롤 방지
+            make.bottom.equalTo(drawerCollectionView.snp.bottom).offset(30)// 항상 contentView 크기가 더 크게, 전체 높이 설정
+        }
+
+        customTotalSegmentView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(34)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(90)
         }
         
         closetCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentIntegrationView.snp.bottom).offset(15)
+            make.top.equalTo(customTotalSegmentView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
             make.width.equalTo(353)
             make.height.equalTo(354)
         }
         
         seeAllButton.snp.makeConstraints { make in
-            make.top.equalTo(closetCollectionView.snp.bottom).offset(15)
+            make.top.equalTo(closetCollectionView.snp.bottom).offset(4)
             make.trailing.equalToSuperview().offset(-20)
-            make.width.equalTo(60)
-            make.height.equalTo(22)
+            make.width.equalTo(61)
+            make.height.equalTo(44)
         }
         
+        frontIconView.snp.makeConstraints{ make in
+            make.top.equalTo(seeAllButton.snp.top).offset(16)
+            make.trailing.equalToSuperview().offset(-17)
+            make.width.height.equalTo(12)
+        }
+                
         bannerScrollView.snp.makeConstraints { make in
             make.top.equalTo(closetCollectionView.snp.bottom).offset(60)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(105) // banner기준 상하 5pt더 줌
+            make.height.equalTo(105)
         }
 
         bannerStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalToSuperview().offset(5)
             make.height.equalTo(95)
-            make.width.equalToSuperview().multipliedBy(2) // 배너 2개라서 x2
+            make.width.equalToSuperview().multipliedBy(2)
         }
 
         pageControl.snp.makeConstraints { make in
@@ -119,10 +169,24 @@ final class ClosetView: UIView {
             make.centerX.equalToSuperview()
         }
 
-
         drawerTitle.snp.makeConstraints { make in
             make.top.equalTo(pageControl.snp.bottom).offset(22)
             make.leading.equalToSuperview().offset(20)
+        }
+        
+        
+        optionButton.snp.makeConstraints { make in
+            make.top.equalTo(drawerTitle.snp.top)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.height.equalTo(24)
+        }
+        
+        drawerCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(drawerTitle.snp.bottom).offset(10)
+            //make.leading.trailing.equalToSuperview().inset(18)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(255)
+            make.width.equalTo(353)
         }
     }
 }
@@ -133,3 +197,8 @@ extension ClosetView: UIScrollViewDelegate {
         pageControl.currentPage = pageIndex
     }
 }
+
+/*더 수정할 부분 : DrawerCollectionView 이거 6개 너무 가라임, height 같은거 좀 더 수정 가능,
+ seeAllButton 이거 그냥 빛좋은 개살구임
+ 화면 연결 아직 미구현
+ */

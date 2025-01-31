@@ -123,19 +123,19 @@ class ClosetCollectionViewCell: UICollectionViewCell {
     
     // 상품 넘버링
     let numberLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.font = UIFont.ptdBoldFont(ofSize: 14)
         $0.textColor = .white
         $0.backgroundColor = UIColor.mainBrown600
         $0.textAlignment = .center
-        $0.layer.cornerRadius = 5
+        $0.layer.cornerRadius = 2
         $0.clipsToBounds = true
     }
     
     // N회 라벨
     let countLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        $0.font = UIFont.ptdRegularFont(ofSize: 12)
         $0.textColor = .white
-        $0.backgroundColor = UIColor.mainBrown600
+        $0.backgroundColor = UIColor.mainBrown800
         $0.textAlignment = .center
         $0.layer.cornerRadius = 5
         $0.clipsToBounds = true
@@ -216,6 +216,7 @@ class ClosetCollectionViewCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(productImageView.snp.bottom).offset(5)
             $0.leading.equalToSuperview()
+            
         }
         
         overlayView.snp.makeConstraints {

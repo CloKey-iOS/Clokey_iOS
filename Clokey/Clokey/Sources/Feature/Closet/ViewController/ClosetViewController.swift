@@ -4,6 +4,7 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - Properties
     private let closetView = ClosetView()
     private var products: [ClosetModel] = [] //ClosetModel의 배열, UICollectionView에 표시될 데이터 저장
+    private var drawers: [DrawerModel] = DrawerModel.makeDummy()
 
     // MARK: - Lifecycle
     override func loadView() {
@@ -20,17 +21,19 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     //얘는 레이아웃 변경 되면 indicator bar 위치 업데이트 하기 위해서
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let initialIndex = closetView.segmentIntegrationView.segmentedControl.selectedSegmentIndex
-        closetView.segmentIntegrationView.updateIndicatorPosition(for: initialIndex)
+        let initialIndex = closetView.customTotalSegmentView.segmentedControl.selectedSegmentIndex
+        closetView.customTotalSegmentView.updateIndicatorPosition(for: initialIndex)
     }
     // 이건 collectionView관련된 코드고
     private func setupCollectionView() {
-        closetView.closetCollectionView.dataSource = self
+        closetView.closetCollectionView.dataSource = self //ClosetCollectionView 데이터 연결
         closetView.closetCollectionView.delegate = self
+        closetView.drawerCollectionView.dataSource = self //DrawerCollectionView 데이터 연결
+        closetView.drawerCollectionView.delegate = self
     }
     //얘는 UISegmentControl 변경될때 SegmentChanged 메서드 실행되도록
     private func setupSegmentedControl() {
-        closetView.segmentIntegrationView.segmentedControl.addTarget(
+        closetView.customTotalSegmentView.segmentedControl.addTarget(
             self,
             action: #selector(segmentChanged(_:)),
             for: .valueChanged
@@ -39,13 +42,13 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     // 얘가 위에서 말한 segmentChanged 메서드, 사용자가 UISegmentControl 변경하면 실행
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        closetView.segmentIntegrationView.updateIndicatorPosition(for: index)
+        closetView.customTotalSegmentView.updateIndicatorPosition(for: index)
         updateContent(for: index)
     }
     
     //초기 인덱스 가져오는 역할, 시뮬레이터 돌리면 첫번쨰 세그먼트 띄워주기, 아까 ViewDidLoad에 있던 애
     private func loadInitialData() {
-        let initialIndex = closetView.segmentIntegrationView.segmentedControl.selectedSegmentIndex
+        let initialIndex = closetView.customTotalSegmentView.segmentedControl.selectedSegmentIndex
         updateContent(for: initialIndex)
     }
 
@@ -53,9 +56,9 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     private func updateContent(for index: Int) {
         if index == 0 {
             products = ClosetModel.getDummyData(for: index)
-            closetView.segmentIntegrationView.toggleCategoryButtons(isHidden: true)
+            closetView.customTotalSegmentView.toggleCategoryButtons(isHidden: true)
             closetView.closetCollectionView.snp.remakeConstraints { make in
-                make.top.equalTo(closetView.segmentIntegrationView.divideLine.snp.bottom).offset(16)
+                make.top.equalTo(closetView.customTotalSegmentView.divideLine.snp.bottom).offset(16)
                 make.centerX.equalToSuperview()
                 make.width.equalTo(353)
                 make.height.equalTo(354)
@@ -66,18 +69,18 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
                 products = ClosetModel.getDummyData(for: index)
 
                 // categoryScrollView를 보임 처리
-                closetView.segmentIntegrationView.categoryScrollView.isHidden = false
+                closetView.customTotalSegmentView.categoryScrollView.isHidden = false
 
                 // categoryScrollView 아래에 closetCollectionView 배치
                 closetView.closetCollectionView.snp.remakeConstraints { make in
-                    make.top.equalTo(closetView.segmentIntegrationView.categoryScrollView.snp.bottom)//.offset(6)
+                    make.top.equalTo(closetView.customTotalSegmentView.categoryScrollView.snp.bottom)//.offset(6)
                     make.centerX.equalToSuperview()
                     make.width.equalTo(353)
                     make.height.equalTo(354)
                 }
 
                 // 카테고리 버튼 업데이트
-                closetView.segmentIntegrationView.updateCategories(for: category.buttons)
+                closetView.customTotalSegmentView.updateCategories(for: category.buttons)
             }
         }
         closetView.closetCollectionView.reloadData()
@@ -85,21 +88,36 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
 
     // 얘넨 collectionView 관련된 건데 형은 다른 collectionView쓰시니까..
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ClosetCollectionViewCell.identifier,
-            for: indexPath
-        ) as? ClosetCollectionViewCell else {
-            fatalError("Unable to dequeue ClosetCollectionViewCell")
+            if collectionView == closetView.closetCollectionView {
+                return products.count
+            } else if collectionView == closetView.drawerCollectionView {
+                return drawers.count // 🔹 서랍 개수 반환
+            }
+            return 0
         }
-        let product = products[indexPath.item]
-        cell.productImageView.image = product.image
-        cell.numberLabel.text = product.number
-        cell.countLabel.text = product.count
-        cell.nameLabel.text = product.name
-        return cell
+
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            if collectionView == closetView.closetCollectionView {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClosetCollectionViewCell.identifier, for: indexPath) as? ClosetCollectionViewCell else {
+                    fatalError("Unable to dequeue ClosetCollectionViewCell")
+                }
+                let product = products[indexPath.item]
+                cell.productImageView.image = product.image
+                cell.numberLabel.text = product.number 
+                cell.countLabel.text = product.count
+                cell.nameLabel.text = product.name
+                return cell
+            } else if collectionView == closetView.drawerCollectionView {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DrawerCollectionViewCell.identifier, for: indexPath) as? DrawerCollectionViewCell else {
+                    fatalError("Unable to dequeue DrawerCollectionViewCell")
+                }
+                let drawer = drawers[indexPath.item]
+                cell.productImageView.image = drawer.image
+                cell.folderLabel.text = drawer.name
+                cell.itemCountLabel.text = drawer.item
+                return cell
+            }
+            return UICollectionViewCell()
+
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SegmentIntegrationView: UIView {
+class CustomTotalSegmentView: UIView {
     
     // MARK: - Subviews
     let menuButton = UIButton().then {
@@ -115,7 +115,7 @@ class SegmentIntegrationView: UIView {
     }
     //다른 세그먼트들은 (상의, 기타, 전체, 하의) 2글자인데, 아우터는 3글자임 그 pt 차이가 15여서 index == 3을 15만큼 더 길이를 늘림
     private func adjustSegmentWidths() {
-        let totalWidth = frame.width - 40 // SegmentIntegrationView의 leading 간격 반영
+        let totalWidth = frame.width - 40 // CustomTotalSegmentView의 leading 간격 반영
         let additionalWidth: CGFloat = 15 // 추가 너비
         let baseWidth = (totalWidth - additionalWidth) / 5 // 기본 세그먼트 너비
 

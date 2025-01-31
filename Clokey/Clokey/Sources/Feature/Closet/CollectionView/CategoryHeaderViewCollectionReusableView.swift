@@ -4,7 +4,7 @@
 //
 //  Created by 한태빈 on 1/21/25.
 //
-
+/*
 import UIKit
 import SnapKit
 
@@ -38,3 +38,4 @@ class CategoryHeaderView: UICollectionReusableView {
     }
 }
 
+*/
