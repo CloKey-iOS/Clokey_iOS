@@ -70,42 +70,43 @@ class CustomTotalSegmentView: UIView {
     }
     
     private func setupConstraints() {
-        menuButton.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
-            make.height.width.equalTo(24)
+
+        menuButton.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.height.width.equalTo(24)
         }
         
-        segmentedControl.snp.makeConstraints { make in
-            make.bottom.equalTo(menuButton.snp.bottom)
-            make.leading.equalTo(menuButton.snp.trailing).offset(18)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(30)
+        segmentedControl.snp.makeConstraints {
+            $0.bottom.equalTo(menuButton.snp.bottom)
+            $0.leading.equalTo(menuButton.snp.trailing).offset(18)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(30)
         }
         
-        divideLine.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom)
-            make.leading.equalTo(menuButton.snp.trailing).offset(24)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(1)
+        divideLine.snp.makeConstraints {
+            $0.top.equalTo(segmentedControl.snp.bottom)
+            $0.leading.equalTo(menuButton.snp.trailing).offset(24)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(1)
         }
         
-        indicatorBar.snp.makeConstraints { make in
-            make.width.equalTo(44)
-            make.height.equalTo(3)
-            make.bottom.equalTo(segmentedControl.snp.bottom).offset(2)
-            make.leading.equalTo(divideLine.snp.leading)
+        indicatorBar.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(3)
+            $0.bottom.equalTo(segmentedControl.snp.bottom).offset(2)
+            $0.leading.equalTo(divideLine.snp.leading)
         }
         
-        categoryScrollView.snp.makeConstraints { make in
-            make.top.equalTo(divideLine.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(49)
+        categoryScrollView.snp.makeConstraints {
+            $0.top.equalTo(divideLine.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(49)
         }
         
-        categoryButtonStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(29)
-            make.top.equalTo(categoryScrollView.snp.top).offset(10)
+        categoryButtonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(29)
+            $0.top.equalTo(categoryScrollView.snp.top).offset(10)
         }
     }
     
@@ -147,11 +148,12 @@ class CustomTotalSegmentView: UIView {
         let indicatorBarLeading = cumulativeWidth + (selectedSegmentWidth / 2) - 23 // Indicator 중심 계산
 
         UIView.animate(withDuration: 0.3) {
-            self.indicatorBar.snp.remakeConstraints { make in
-                make.leading.equalTo(self.segmentedControl.snp.leading).offset(indicatorBarLeading)
-                make.width.equalTo(44)
-                make.height.equalTo(3)
-                make.bottom.equalTo(self.segmentedControl.snp.bottom).offset(2)
+
+            self.indicatorBar.snp.remakeConstraints {
+                $0.leading.equalTo(self.segmentedControl.snp.leading).offset(indicatorBarLeading)
+                $0.width.equalTo(44)
+                $0.height.equalTo(3)
+                $0.bottom.equalTo(self.segmentedControl.snp.bottom).offset(2)
             }
             self.layoutIfNeeded()
         }
