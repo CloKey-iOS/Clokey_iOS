@@ -28,8 +28,8 @@ class SmartSummationBannerView: UIView {
         $0.backgroundColor = UIColor(named: "pointOrange800")
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.ptdMediumFont(ofSize: 11)
-        $0.layer.cornerRadius = 14
-        $0.clipsToBounds = true // ✅ cornerRadius 적용을 위한 설정 추가
+        $0.layer.cornerRadius = 10
+        $0.clipsToBounds = true
     }
     
     // MARK: - Initializer

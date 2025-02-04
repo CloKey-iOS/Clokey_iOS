@@ -79,7 +79,7 @@ class DrawerCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = false  // 그림자가 잘리지 않도록 설정
         layer.shadowColor = UIColor.black.cgColor  // 그림자 색상
         layer.shadowOpacity = 0.2 //그림자 투명도
-        layer.shadowRadius = 4  //그림자 블러
+        layer.shadowRadius = 2  //그림자 블러
         layer.shadowOffset = CGSize(width: 0, height: 0)  // .zero로 해도 됩니다.
     }
     
@@ -87,6 +87,10 @@ class DrawerCollectionViewCell: UICollectionViewCell {
             super.layoutSubviews()
             layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         }
-}
+    
+//    func configure(with model: DrawerModel) {
+//        folderLabel.text = model.folderName  // name → folderName 변경
+//    }// 이것도 해둬야 하는 건가요?
 
+}
 

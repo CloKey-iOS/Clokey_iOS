@@ -332,8 +332,8 @@
 			children = (
 				07E1CB5D2D36A10000F86BB8 /* CustomButton.swift */,
 				07E1CB5E2D36A10000F86BB8 /* CustomButtonTextField.swift */,
-				07E1CB4E2D36721900F86BB8 /* CustomNavigationBar.swift */,
 				1EFB17D32D4D062800449A40 /* CustomTotalSegmentView.swift */,
+				07E1CB4E2D36721900F86BB8 /* CustomNavigationBar.swift */,
 				07E1CB572D3679A800F86BB8 /* CustomTextField.swift */,
 			);
 			path = Components;

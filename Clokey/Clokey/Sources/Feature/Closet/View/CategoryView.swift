@@ -1,14 +1,12 @@
 
-/*
- import UIKit
+
+import UIKit
 import SnapKit
 import Then
 
 class CategoryView: UIView {
 
     // MARK: - UI Components
-
-    // Header View (원래 주어진 헤더 View를 사용하지 않아 "카테고리"와 뒤로가기 버튼이 있는 View 생성)
     let headerView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -201,4 +199,4 @@ class CategoryView: UIView {
         }
     }
 }
-*/
+

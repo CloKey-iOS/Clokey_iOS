@@ -11,7 +11,7 @@ class ArrangeClosetBannerView: UIView {
     let bannerTitle = UILabel().then {
         $0.text = "겨울이 오기 전, 옷장도 준비 완료!"
         $0.font = UIFont.ptdBoldFont(ofSize: 16)
-        $0.textColor = .black
+        $0.textColor = UIColor(named: "mainBrown800")
     }
     
     let bannerDescription = UILabel().then {
@@ -25,7 +25,7 @@ class ArrangeClosetBannerView: UIView {
         $0.backgroundColor = UIColor(named: "pointOrange800")
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.ptdMediumFont(ofSize: 11)
-        $0.layer.cornerRadius = 14
+        $0.layer.cornerRadius = 10
         $0.layer.masksToBounds = true
         $0.clipsToBounds = true
     }
