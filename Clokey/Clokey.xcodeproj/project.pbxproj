@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		070258B82D31083D00065369 /* AddClothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B72D31083D00065369 /* AddClothView.swift */; };
 		070258BA2D31084300065369 /* AddClothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B92D31084300065369 /* AddClothViewController.swift */; };
-
-		070258BE2D31085900065369 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BD2D31085900065369 /* ClosetView.swift */; };
-		070258C02D31086A00065369 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BF2D31086A00065369 /* ClosetViewController.swift */; };
 		07649C292D4DDD5D00B6B2B2 /* UpdateFriendCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C252D4DDD5D00B6B2B2 /* UpdateFriendCalendarCollectionViewCell.swift */; };
 		07649C2A2D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C272D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift */; };
 		07649C2B2D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C262D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift */; };
@@ -79,6 +76,29 @@
 		07ECCB632D4E35FE00AFF486 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB622D4E35FE00AFF486 /* RxBlocking */; };
 		07ECCB652D4E35FE00AFF486 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB642D4E35FE00AFF486 /* RxCocoa */; };
 		07ECCB672D4E35FE00AFF486 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB662D4E35FE00AFF486 /* RxRelay */; };
+		1EE6BAA72D5783D0006F8D14 /* ArrangeClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA952D5783D0006F8D14 /* ArrangeClosetView.swift */; };
+		1EE6BAA82D5783D0006F8D14 /* FolderDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */; };
+		1EE6BAA92D5783D0006F8D14 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA982D5783D0006F8D14 /* ClosetView.swift */; };
+		1EE6BAAA2D5783D0006F8D14 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA972D5783D0006F8D14 /* CategoryView.swift */; };
+		1EE6BAAB2D5783D0006F8D14 /* DrawerAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9A2D5783D0006F8D14 /* DrawerAddView.swift */; };
+		1EE6BAAC2D5783D0006F8D14 /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9C2D5783D0006F8D14 /* DrawerView.swift */; };
+		1EE6BAAD2D5783D0006F8D14 /* DisplayAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA992D5783D0006F8D14 /* DisplayAllView.swift */; };
+		1EE6BAAE2D5783D0006F8D14 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BAA22D5783D0006F8D14 /* ClosetViewController.swift */; };
+		1EE6BAAF2D5783D0006F8D14 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */; };
+		1EE6BAB02D5783D0006F8D14 /* DrawerDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */; };
+		1EE6BAB12D5783D0006F8D14 /* DrawerAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BAA42D5783D0006F8D14 /* DrawerAddViewController.swift */; };
+		1EE6BAB22D5783D0006F8D14 /* ClosetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA8D2D5783D0006F8D14 /* ClosetCollectionViewCell.swift */; };
+		1EE6BAB32D5783D0006F8D14 /* DrawerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA8E2D5783D0006F8D14 /* DrawerCollectionViewCell.swift */; };
+		1EE6BAB42D5783D0006F8D14 /* DrawerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA922D5783D0006F8D14 /* DrawerModel.swift */; };
+		1EE6BAB52D5783D0006F8D14 /* DisplayAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BAA32D5783D0006F8D14 /* DisplayAllViewController.swift */; };
+		1EE6BAB62D5783D0006F8D14 /* ClosetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA912D5783D0006F8D14 /* ClosetModel.swift */; };
+		1EE6BAB72D5783D0006F8D14 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BAA52D5783D0006F8D14 /* DrawerViewController.swift */; };
+		1EE6BAB82D5783D0006F8D14 /* CategoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA962D5783D0006F8D14 /* CategoryHeaderView.swift */; };
+		1EE6BAB92D5783D0006F8D14 /* SmartSummationBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9F2D5783D0006F8D14 /* SmartSummationBannerView.swift */; };
+		1EE6BABA2D5783D0006F8D14 /* ArrangeClosetBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA942D5783D0006F8D14 /* ArrangeClosetBannerView.swift */; };
+		1EE6BABB2D5783D0006F8D14 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA902D5783D0006F8D14 /* CategoryModel.swift */; };
+		1EE6BABC2D5783D0006F8D14 /* CategoryViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA8C2D5783D0006F8D14 /* CategoryViewCollectionViewCell.swift */; };
+		1EE6BABD2D5783D0006F8D14 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BAA12D5783D0006F8D14 /* CategoryViewController.swift */; };
 		A62A429E2D4D2ADE00672D3F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429A2D4D2ADE00672D3F /* MainView.swift */; };
 		A62A429F2D4D2ADE00672D3F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429C2D4D2ADE00672D3F /* HeaderView.swift */; };
 		A62A42A02D4D2ADE00672D3F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429B2D4D2ADE00672D3F /* MainViewController.swift */; };
@@ -91,8 +111,6 @@
 		070258A12D30DD0E00065369 /* Clokey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clokey.entitlements; sourceTree = "<group>"; };
 		070258B72D31083D00065369 /* AddClothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothView.swift; sourceTree = "<group>"; };
 		070258B92D31084300065369 /* AddClothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothViewController.swift; sourceTree = "<group>"; };
-		070258BD2D31085900065369 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
-		070258BF2D31086A00065369 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
 		07649C252D4DDD5D00B6B2B2 /* UpdateFriendCalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriendCalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		07649C262D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriendClothesCollectionViewCell.swift; sourceTree = "<group>"; };
 		07649C272D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClothesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -148,6 +166,29 @@
 		07ECCB5A2D4E351E00AFF486 /* CustomTotalSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTotalSegmentView.swift; sourceTree = "<group>"; };
 		07ECCB5B2D4E351E00AFF486 /* CustomCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryModel.swift; sourceTree = "<group>"; };
 		07F093102D2418380075659F /* Clokey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clokey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EE6BA8C2D5783D0006F8D14 /* CategoryViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EE6BA8D2D5783D0006F8D14 /* ClosetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EE6BA8E2D5783D0006F8D14 /* DrawerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCollectionViewCell.swift; sourceTree = "<group>"; };
+		1EE6BA902D5783D0006F8D14 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		1EE6BA912D5783D0006F8D14 /* ClosetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetModel.swift; sourceTree = "<group>"; };
+		1EE6BA922D5783D0006F8D14 /* DrawerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerModel.swift; sourceTree = "<group>"; };
+		1EE6BA942D5783D0006F8D14 /* ArrangeClosetBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrangeClosetBannerView.swift; sourceTree = "<group>"; };
+		1EE6BA952D5783D0006F8D14 /* ArrangeClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrangeClosetView.swift; sourceTree = "<group>"; };
+		1EE6BA962D5783D0006F8D14 /* CategoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeaderView.swift; sourceTree = "<group>"; };
+		1EE6BA972D5783D0006F8D14 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		1EE6BA982D5783D0006F8D14 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
+		1EE6BA992D5783D0006F8D14 /* DisplayAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllView.swift; sourceTree = "<group>"; };
+		1EE6BA9A2D5783D0006F8D14 /* DrawerAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerAddView.swift; sourceTree = "<group>"; };
+		1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerDropdownView.swift; sourceTree = "<group>"; };
+		1EE6BA9C2D5783D0006F8D14 /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDropdownView.swift; sourceTree = "<group>"; };
+		1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		1EE6BA9F2D5783D0006F8D14 /* SmartSummationBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSummationBannerView.swift; sourceTree = "<group>"; };
+		1EE6BAA12D5783D0006F8D14 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		1EE6BAA22D5783D0006F8D14 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
+		1EE6BAA32D5783D0006F8D14 /* DisplayAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAllViewController.swift; sourceTree = "<group>"; };
+		1EE6BAA42D5783D0006F8D14 /* DrawerAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerAddViewController.swift; sourceTree = "<group>"; };
+		1EE6BAA52D5783D0006F8D14 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		A62A429A2D4D2ADE00672D3F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A62A429B2D4D2ADE00672D3F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A62A429C2D4D2ADE00672D3F /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -298,12 +339,12 @@
 		070258A82D31074100065369 /* Closet */ = {
 			isa = PBXGroup;
 			children = (
-				1E40215C2D4215FE00563363 /* View */,
-				1E40215D2D42161100563363 /* CollectionView */,
-				1E4021632D42169000563363 /* ViewController */,
-				1E4021622D42167900563363 /* Model */,
+				1EE6BA8F2D5783D0006F8D14 /* CollectionView */,
+				1EE6BA932D5783D0006F8D14 /* Model */,
+				1EE6BAA02D5783D0006F8D14 /* View */,
+				1EE6BAA62D5783D0006F8D14 /* ViewController */,
 			);
-			path = Closet;
+			name = Closet;
 			sourceTree = "<group>";
 		};
 		070258A92D31074500065369 /* Profile */ = {
@@ -465,7 +506,6 @@
 			children = (
 				07E1CB5D2D36A10000F86BB8 /* CustomButton.swift */,
 				07E1CB5E2D36A10000F86BB8 /* CustomButtonTextField.swift */,
-				1EFB17D32D4D062800449A40 /* CustomTotalSegmentView.swift */,
 				07E1CB4E2D36721900F86BB8 /* CustomNavigationBar.swift */,
 				07E1CB572D3679A800F86BB8 /* CustomTextField.swift */,
 				07ECCB572D4E351E00AFF486 /* CustomCollectionViewCell.swift */,
@@ -558,6 +598,61 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		1EE6BA8F2D5783D0006F8D14 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1EE6BA8C2D5783D0006F8D14 /* CategoryViewCollectionViewCell.swift */,
+				1EE6BA8D2D5783D0006F8D14 /* ClosetCollectionViewCell.swift */,
+				1EE6BA8E2D5783D0006F8D14 /* DrawerCollectionViewCell.swift */,
+			);
+			name = CollectionView;
+			path = Clokey/Sources/Feature/Closet/CollectionView;
+			sourceTree = SOURCE_ROOT;
+		};
+		1EE6BA932D5783D0006F8D14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1EE6BA902D5783D0006F8D14 /* CategoryModel.swift */,
+				1EE6BA912D5783D0006F8D14 /* ClosetModel.swift */,
+				1EE6BA922D5783D0006F8D14 /* DrawerModel.swift */,
+			);
+			name = Model;
+			path = Clokey/Sources/Feature/Closet/Model;
+			sourceTree = SOURCE_ROOT;
+		};
+		1EE6BAA02D5783D0006F8D14 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1EE6BA942D5783D0006F8D14 /* ArrangeClosetBannerView.swift */,
+				1EE6BA952D5783D0006F8D14 /* ArrangeClosetView.swift */,
+				1EE6BA962D5783D0006F8D14 /* CategoryHeaderView.swift */,
+				1EE6BA972D5783D0006F8D14 /* CategoryView.swift */,
+				1EE6BA982D5783D0006F8D14 /* ClosetView.swift */,
+				1EE6BA992D5783D0006F8D14 /* DisplayAllView.swift */,
+				1EE6BA9A2D5783D0006F8D14 /* DrawerAddView.swift */,
+				1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */,
+				1EE6BA9C2D5783D0006F8D14 /* DrawerView.swift */,
+				1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */,
+				1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */,
+				1EE6BA9F2D5783D0006F8D14 /* SmartSummationBannerView.swift */,
+			);
+			name = View;
+			path = Clokey/Sources/Feature/Closet/View;
+			sourceTree = SOURCE_ROOT;
+		};
+		1EE6BAA62D5783D0006F8D14 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1EE6BAA12D5783D0006F8D14 /* CategoryViewController.swift */,
+				1EE6BAA22D5783D0006F8D14 /* ClosetViewController.swift */,
+				1EE6BAA32D5783D0006F8D14 /* DisplayAllViewController.swift */,
+				1EE6BAA42D5783D0006F8D14 /* DrawerAddViewController.swift */,
+				1EE6BAA52D5783D0006F8D14 /* DrawerViewController.swift */,
+			);
+			name = ViewController;
+			path = Clokey/Sources/Feature/Closet/ViewController;
+			sourceTree = SOURCE_ROOT;
 		};
 		A62A42FE2D4D30F700672D3F /* Home */ = {
 			isa = PBXGroup;
@@ -682,9 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070258BE2D31085900065369 /* ClosetView.swift in Sources */,
 				076FAB4E2D2EBB3A00FF3979 /* KakaoAuthService.swift in Sources */,
-				070258C02D31086A00065369 /* ClosetViewController.swift in Sources */,
 				A6548E532D3F47DE00F79B66 /* WeatherAPI.swift in Sources */,
 				A62A429E2D4D2ADE00672D3F /* MainView.swift in Sources */,
 				A62A429F2D4D2ADE00672D3F /* HeaderView.swift in Sources */,
@@ -716,6 +809,29 @@
 				07ECCB4F2D4E34DF00AFF486 /* CalendarViewController.swift in Sources */,
 				07ECCB502D4E34DF00AFF486 /* TagClothModel.swift in Sources */,
 				07ECCB512D4E34DF00AFF486 /* CalendarHelper.swift in Sources */,
+				1EE6BAA72D5783D0006F8D14 /* ArrangeClosetView.swift in Sources */,
+				1EE6BAA82D5783D0006F8D14 /* FolderDropdownView.swift in Sources */,
+				1EE6BAA92D5783D0006F8D14 /* ClosetView.swift in Sources */,
+				1EE6BAAA2D5783D0006F8D14 /* CategoryView.swift in Sources */,
+				1EE6BAAB2D5783D0006F8D14 /* DrawerAddView.swift in Sources */,
+				1EE6BAAC2D5783D0006F8D14 /* DrawerView.swift in Sources */,
+				1EE6BAAD2D5783D0006F8D14 /* DisplayAllView.swift in Sources */,
+				1EE6BAAE2D5783D0006F8D14 /* ClosetViewController.swift in Sources */,
+				1EE6BAAF2D5783D0006F8D14 /* PopUpView.swift in Sources */,
+				1EE6BAB02D5783D0006F8D14 /* DrawerDropdownView.swift in Sources */,
+				1EE6BAB12D5783D0006F8D14 /* DrawerAddViewController.swift in Sources */,
+				1EE6BAB22D5783D0006F8D14 /* ClosetCollectionViewCell.swift in Sources */,
+				1EE6BAB32D5783D0006F8D14 /* DrawerCollectionViewCell.swift in Sources */,
+				1EE6BAB42D5783D0006F8D14 /* DrawerModel.swift in Sources */,
+				1EE6BAB52D5783D0006F8D14 /* DisplayAllViewController.swift in Sources */,
+				1EE6BAB62D5783D0006F8D14 /* ClosetModel.swift in Sources */,
+				1EE6BAB72D5783D0006F8D14 /* DrawerViewController.swift in Sources */,
+				1EE6BAB82D5783D0006F8D14 /* CategoryHeaderView.swift in Sources */,
+				1EE6BAB92D5783D0006F8D14 /* SmartSummationBannerView.swift in Sources */,
+				1EE6BABA2D5783D0006F8D14 /* ArrangeClosetBannerView.swift in Sources */,
+				1EE6BABB2D5783D0006F8D14 /* CategoryModel.swift in Sources */,
+				1EE6BABC2D5783D0006F8D14 /* CategoryViewCollectionViewCell.swift in Sources */,
+				1EE6BABD2D5783D0006F8D14 /* CategoryViewController.swift in Sources */,
 				07649C2B2D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift in Sources */,
 				076FAB3F2D2E6E0200FF3979 /* AppDelegate.swift in Sources */,
 				07E1CB4B2D3668CE00F86BB8 /* Constants.swift in Sources */,
@@ -723,7 +839,6 @@
 				07E1CB5F2D36A10000F86BB8 /* CustomButton.swift in Sources */,
 				07E1CB602D36A10000F86BB8 /* CustomButtonTextField.swift in Sources */,
 				07E1CB662D36A63200F86BB8 /* ViewController.swift in Sources */,
-				1EFB17D92D4D062800449A40 /* CustomTotalSegmentView.swift in Sources */,
 				07E1CB472D3662EC00F86BB8 /* UIColor+Extension.swift in Sources */,
 				07E1CB482D3662EC00F86BB8 /* UIImage+Extensions.swift in Sources */,
 				07E1CB442D3662D900F86BB8 /* UIFont+Extensions.swift in Sources */,

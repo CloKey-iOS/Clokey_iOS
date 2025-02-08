@@ -3,7 +3,8 @@ import UIKit
 final class ClosetViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     // MARK: - Properties
     private let closetView = ClosetView()
-    private var products: [ClosetModel] = [] //ClosetModel의 배열, UICollectionView에 표시될 데이터 저장
+    private var products: [ClosetModel] = []
+    //ClosetModel의 배열, UICollectionView에 표시될 데이터 저장
     private var drawers: [DrawerModel] = DrawerModel.makeDummy()
     // var drawerData: [DrawerModel] = [] // API에서 데이터를 채우는 방식으로 변경.. 이렇게 하면 되나요??
     
@@ -17,9 +18,47 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        setupActions()//menuButton클릭시 Model 액션
         loadInitialData()//첫 번째 세그먼트에 해당하는 데이터 로드
         setupSegmentedControl()
     }
+    
+    private func setupActions() {
+        closetView.customTotalSegmentView.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        closetView.seeAllButton.addTarget(self, action: #selector(seeAllButtonTapped), for: .touchUpInside)
+        closetView.optionButton.addTarget(self, action: #selector(optionButtonTapped), for: .touchUpInside)
+    }
+
+    // ✅ menuButton 클릭 시 CategoryViewController로 이동
+    @objc private func menuButtonTapped() {
+        let categoryVC = CategoryViewController()
+        categoryVC.modalPresentationStyle = .fullScreen
+        categoryVC.modalTransitionStyle = .coverVertical
+        present(categoryVC, animated: true, completion: nil)
+    }
+    //전체보기 버튼 클릭시 전체보기뷰로 이동
+    @objc private func seeAllButtonTapped() {
+        let displayAllVC = DisplayAllViewController()
+        
+        //  현재 ClosetViewController가 네비게이션 컨트롤러 내에 있는 경우 `push`
+        if let navigationController = self.navigationController {
+            navigationController.pushViewController(displayAllVC, animated: true)
+        } else {
+            print("❌ ClosetViewController가 네비게이션 컨트롤러 안에 없음")
+        }
+    }
+    
+    @objc private func optionButtonTapped() {
+        let drawerAddVC = DrawerAddViewController()
+        
+        //  현재 ClosetViewController가 네비게이션 컨트롤러 내에 있는 경우 `push`
+        if let navigationController = self.navigationController {
+            navigationController.pushViewController(drawerAddVC, animated: true)
+        } else {
+            print("❌ ClosetViewController가 네비게이션 컨트롤러 안에 없음")
+        }
+    }
+
     
     //얘는 레이아웃 변경 되면 indicator bar 위치 업데이트 하기 위해서
     override func viewDidLayoutSubviews() {
@@ -57,8 +96,9 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     
     //이게 segmentIntegrationView속 func toggleCategoryButtons에서 말한 부분인데 "전체"일때는 buttontoggle 숨기고, collectionView top관련 간격 재조정해줍니다. divideLine 아래로 바로 위치하게.
     private func updateContent(for index: Int) {
+        products = ClosetModel.getDummyData(for: index)
+
         if index == 0 {
-            products = ClosetModel.getDummyData(for: index)
             closetView.customTotalSegmentView.toggleCategoryButtons(isHidden: true)
             closetView.closetCollectionView.snp.remakeConstraints { make in
                 make.top.equalTo(closetView.customTotalSegmentView.divideLine.snp.bottom).offset(16)
@@ -66,29 +106,24 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
                 make.width.equalTo(353)
                 make.height.equalTo(354)
             }
-            //반대로 "전체" 아닐땐 ishidden = false하고 collectionView 위치를 segmentIntegrationView안에 있는 categoryScrollView(버튼을 감쌋던 scrollView 아래로 위치하게 했어용
-        } else {
-            if let category = CategoryModel.getCategories(for: index) {
-                products = ClosetModel.getDummyData(for: index)
-                
-                // categoryScrollView를 보임 처리
-                closetView.customTotalSegmentView.categoryScrollView.isHidden = false
-                
-                // categoryScrollView 아래에 closetCollectionView 배치
-                closetView.closetCollectionView.snp.remakeConstraints { make in
-                    make.top.equalTo(closetView.customTotalSegmentView.categoryScrollView.snp.bottom)//.offset(6)
-                    make.centerX.equalToSuperview()
-                    make.width.equalTo(353)
-                    make.height.equalTo(354)
-                }
-                
-                // 카테고리 버튼 업데이트
-                closetView.customTotalSegmentView.updateCategories(for: category.buttons)
+        } else if let category = CustomCategoryModel.getCategories(for: index) {
+            // ✅ 카테고리 데이터를 가져와서 설정
+            closetView.customTotalSegmentView.toggleCategoryButtons(isHidden: false)
+            closetView.customTotalSegmentView.updateCategories(for: category.buttons)
+
+            // ✅ categoryScrollView 아래로 CollectionView 배치
+            closetView.closetCollectionView.snp.remakeConstraints { make in
+                make.top.equalTo(closetView.customTotalSegmentView.categoryScrollView.snp.bottom)
+                make.centerX.equalToSuperview()
+                make.width.equalTo(353)
+                make.height.equalTo(354)
             }
         }
+
         closetView.closetCollectionView.reloadData()
     }
-    
+
+
     // 얘넨 collectionView 관련된 건데 형은 다른 collectionView쓰시니까..
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == closetView.closetCollectionView {
@@ -124,14 +159,14 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
         
     }
     
-    // ✅ UICollectionView 셀 클릭 시 PopUpView 띄우기
+    //  UICollectionView 셀 클릭 시 PopUpView 띄우기
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == closetView.closetCollectionView {
             showPopUpView(for: products[indexPath.item])
         }
     }
     
-    // ✅ PopUpView 띄우기
+    // PopUpView 띄우기
     private func showPopUpView(for product: ClosetModel) {
         guard let keyWindow = UIApplication.shared.connectedScenes
                     .compactMap({ ($0 as? UIWindowScene)?.windows.first })
@@ -164,17 +199,17 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
             popUpView.alpha = 1
         }
         
-        // ✅ closeButton 클릭 시 팝업 닫기 기능 추가
+        //  closeButton 클릭 시 팝업 닫기 기능 추가
         popUpView.closeButton.addTarget(self, action: #selector(dismissPopUpView), for: .touchUpInside)
     }
     
-    // ✅ PopUpView 닫기
+    //  PopUpView 닫기
     @objc private func dismissPopUpView() {
         guard let keyWindow = UIApplication.shared.connectedScenes
             .compactMap({ ($0 as? UIWindowScene)?.windows.first })
             .first else { return }
 
-        // 🔹 keyWindow에서 PopUpView 찾기
+        //  keyWindow에서 PopUpView 찾기
         if let popUpView = keyWindow.subviews.first(where: { $0 is TouchPopupView }) {
             UIView.animate(withDuration: 0.3, animations: {
                 self.backgroundView?.alpha = 0 // 배경도 함께 사라지게 함

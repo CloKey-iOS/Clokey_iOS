@@ -1,5 +1,4 @@
 
-/*
 import UIKit
 import SnapKit
 import Then
@@ -8,19 +7,25 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CategoryCollectionViewCell"
     
-    let CategoryButton = UIButton().then {
+
+    
+    let categoryButton = UIButton().then {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .clear
         config.baseForegroundColor = .black
-        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 14, bottom: 5, trailing: 14) // 내부 여백
-        
+        config.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 13, bottom: 4, trailing: 13) // 내부 여백
+        let font = UIFont.ptdRegularFont(ofSize: 16)// 원하는 글씨체와 크기 설정
+        var titleAttr = AttributedString("티셔츠") // 기본 텍스트
+        titleAttr.font = font
+        config.attributedTitle = titleAttr
+
         $0.configuration = config
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor(named: "mainBrown600")!.cgColor
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -31,18 +36,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        addSubview(CategoryButton)
-        CategoryButton.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(20) // 셀의 크기에 따라 버튼 크기 조정
+        addSubview(categoryButton)
+        
+        categoryButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(32)
         }
     }
     
+    
     func configure(with title: String) {
-        CategoryButton.setTitle(title, for: .normal)
-        CategoryButton.sizeToFit() // 텍스트 길이에 따라 너비 조정
-        CategoryButton.snp.updateConstraints { make in
-            make.height.equalTo(32) // 고정 높이
-        }
+        categoryButton.setTitle(title, for: .normal)
     }
 }
-*/

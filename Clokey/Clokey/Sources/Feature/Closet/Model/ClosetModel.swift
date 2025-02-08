@@ -24,16 +24,28 @@
                     ClosetModel(image: .top, number: "3", count: "8회", name: "꽈배기 반집업 니트"),
                     ClosetModel(image: .top, number: "4", count: "7회", name: "꽈배기 반집업 니트"),
                     ClosetModel(image: .top, number: "5", count: "7회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top, number: "6", count: "6회", name: "꽈배기 반집업 니트")
+                    ClosetModel(image: .top, number: "6", count: "6회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "7", count: "9회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "8", count: "8회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "9", count: "8회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "10", count: "7회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "11", count: "7회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "12", count: "6회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "13", count: "9회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "14", count: "8회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "15", count: "8회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "16", count: "7회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "17", count: "7회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "18", count: "6회", name: "꽈배기 반집업 니트")
                 ]
             case 1: // 상의
                 return [
                     ClosetModel(image: .top, number: "1", count: "8회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top2, number: "2", count: "5회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top3, number: "3", count: "3회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top4, number: "4", count: "1회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top5, number: "5", count: "1회", name: "꽈배기 반집업 니트"),
-                    ClosetModel(image: .top6, number: "6", count: "1회", name: "꽈배기 반집업 니트")
+                    ClosetModel(image: .top, number: "2", count: "5회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "3", count: "3회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "4", count: "1회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "5", count: "1회", name: "꽈배기 반집업 니트"),
+                    ClosetModel(image: .top, number: "6", count: "1회", name: "꽈배기 반집업 니트")
                 ]
             case 2: // 하의
                 return [
