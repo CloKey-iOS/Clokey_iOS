@@ -122,12 +122,13 @@ class ClosetCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Public Methods
-    func configureCell(with product: ClosetModel, hideNumberLabel: Bool) {
+    func configureCell(with product: ClosetModel, hideNumberLabel: Bool, hideCountLabel: Bool) {
         productImageView.image = product.image
         nameLabel.text = product.name
         countLabel.text = product.count
         
-        numberLabel.isHidden = hideNumberLabel // ✅ numberLabel 보이기/숨기기 설정
+        numberLabel.isHidden = hideNumberLabel
+        countLabel.isHidden = hideCountLabel
     }
     
     // 선택/해제 메서드

@@ -63,8 +63,8 @@ final class ClosetView: UIView {
         $0.textColor = .black
     }
     
-    let optionButton = UIButton().then{
-        $0.setImage(UIImage(named: "dot3_icon"), for: .normal)
+    let editDrawerButton = UIButton().then{
+        $0.setImage(UIImage(named: "plus_icon"), for: .normal)
         $0.tintColor = UIColor.mainBrown800
         $0.imageView?.contentMode = .scaleAspectFit
     }
@@ -104,7 +104,7 @@ final class ClosetView: UIView {
         contentView.addSubview(seeAllButton)
         contentView.addSubview(frontIconView)
         contentView.addSubview(drawerTitle)
-        contentView.addSubview(optionButton)
+        contentView.addSubview(editDrawerButton)
         contentView.addSubview(drawerCollectionView)
         // 배너 추가
         bannerScrollView.addSubview(bannerStackView)
@@ -175,10 +175,10 @@ final class ClosetView: UIView {
         }
         
         
-        optionButton.snp.makeConstraints { make in
+        editDrawerButton.snp.makeConstraints { make in
             make.top.equalTo(drawerTitle.snp.top)
             make.trailing.equalToSuperview().offset(-20)
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(15)
         }
         
         drawerCollectionView.snp.makeConstraints { make in

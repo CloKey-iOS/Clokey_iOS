@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class DrawerAddView: UIView, SortDropdownViewDelegate {
+final class DrawerEditView: UIView, SortDropdownViewDelegate {
 
     // MARK: - Properties
     
@@ -104,7 +104,7 @@ final class DrawerAddView: UIView, SortDropdownViewDelegate {
         contentView.addSubview(collectionView)
         // 커스텀 세그먼트
         customTotalSegmentView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(136)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(30)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(90)
         }
@@ -138,7 +138,7 @@ final class DrawerAddView: UIView, SortDropdownViewDelegate {
 
         // 컬렉션 뷰 - 정렬 버튼 하단
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(30)
+            $0.top.equalTo(sortButtonStack.snp.bottom).offset(5)
             $0.leading.trailing.bottom.equalToSuperview()
         }
 

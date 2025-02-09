@@ -26,7 +26,7 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
     private func setupActions() {
         closetView.customTotalSegmentView.menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         closetView.seeAllButton.addTarget(self, action: #selector(seeAllButtonTapped), for: .touchUpInside)
-        closetView.optionButton.addTarget(self, action: #selector(optionButtonTapped), for: .touchUpInside)
+        closetView.editDrawerButton.addTarget(self, action: #selector(editDrawerButtonTapped), for: .touchUpInside)
     }
 
     // ✅ menuButton 클릭 시 CategoryViewController로 이동
@@ -48,12 +48,12 @@ final class ClosetViewController: UIViewController, UICollectionViewDataSource, 
         }
     }
     
-    @objc private func optionButtonTapped() {
-        let drawerAddVC = DrawerAddViewController()
+    @objc private func editDrawerButtonTapped() {
+        let drawerEditVC = DrawerEditViewController()
         
         //  현재 ClosetViewController가 네비게이션 컨트롤러 내에 있는 경우 `push`
         if let navigationController = self.navigationController {
-            navigationController.pushViewController(drawerAddVC, animated: true)
+            navigationController.pushViewController(drawerEditVC, animated: true)
         } else {
             print("❌ ClosetViewController가 네비게이션 컨트롤러 안에 없음")
         }

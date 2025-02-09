@@ -1,10 +1,3 @@
-//
-//  DrawerViewController.swift
-//  Clokey
-//
-//  Created by 한태빈 on 2/8/25.
-//
-
 import UIKit
 import SnapKit
 
@@ -13,6 +6,24 @@ class DrawerViewController: UIViewController, UICollectionViewDataSource, UIColl
     private let drawerView = DrawerView()
     
     private var products: [ClosetModel] = []
+    
+    private lazy var editButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "dot3_icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .mainBrown800
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+        
+        return UIBarButtonItem(customView: button)
+    }()
+
+    
+
+    @objc private func editButtonTapped() {
+        
+    }
+
+    
     private var shouldHideNumberLabel: Bool = false
     
     override func viewDidLoad() {
@@ -23,6 +34,8 @@ class DrawerViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     private func setupUI() {
+        navigationItem.rightBarButtonItem = editButton
+        
         let navBarManager = NavigationBarManager()
         navBarManager.addBackButton(
             to: navigationItem,
@@ -68,15 +81,20 @@ class DrawerViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClosetCollectionViewCell.identifier, for: indexPath) as? ClosetCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ClosetCollectionViewCell.identifier,
+            for: indexPath
+        ) as? ClosetCollectionViewCell else {
             fatalError("Unable to dequeue ClosetCollectionViewCell")
         }
         
         let product = products[indexPath.item]
-        cell.configureCell(with: product, hideNumberLabel: shouldHideNumberLabel)
+        // 두 파라미터 모두 전달하여 이미지 로딩 및 레이블 숨김 처리 적용
+        cell.configureCell(with: product, hideNumberLabel: true, hideCountLabel: false)
         
         return cell
     }
+
     
     // MARK: - UICollectionViewDelegate (셀 선택 처리)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

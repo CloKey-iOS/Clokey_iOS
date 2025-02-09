@@ -4,12 +4,6 @@ import SnapKit
 final class DrawerView: UIView, UICollectionViewDataSource {
     
     // MARK: - Properties
-    let editButton = UIButton().then {
-        $0.setImage(UIImage(named: "dot3_icon"), for: .normal)
-        $0.tintColor = UIColor.mainBrown800
-        $0.imageView?.contentMode = .scaleAspectFit
-    }
-    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -42,17 +36,14 @@ final class DrawerView: UIView, UICollectionViewDataSource {
     
     // MARK: - Setup
     private func setupViews() {
-        addSubview(editButton)
+        backgroundColor = .white
         addSubview(collectionView)
         
-        editButton.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(10)
-            make.width.height.equalTo(30)
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(editButton.snp.bottom).offset(10)
-            make.leading.trailing.bottom.equalToSuperview().inset(10)
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide).offset(32)
+
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(10)
         }
     }
     
@@ -77,9 +68,9 @@ final class DrawerView: UIView, UICollectionViewDataSource {
             fatalError("Unable to dequeue ClosetCollectionViewCell")
         }
         
-        let product = products[indexPath.item]
-        cell.configureCell(with: product, hideNumberLabel: shouldHideNumberLabel)
-        
+//        let product = products[indexPath.item]
+//        cell.configureCell(with: product, hideNumberLabel: shouldHideNumberLabel)
+//        
         return cell
     }
 }
