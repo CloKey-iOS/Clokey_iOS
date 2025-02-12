@@ -13,7 +13,7 @@ public enum HistoryEndpoint {
     case historyDetail(historyId: Int)
     case historyLike(data: HistoryLikeRequestDTO)
     case historyComments(historyId: Int, page: Int)
-    case historyCommentWrite(historyId: Int, data: HistoryCommentWriteRequestDTO)
+    case historyCommentWrite(historyId: Int, data: HistoryCommentWriteRequestDTO)// 파라미터, 리퀘스트 데이터 둘 다 있을 때 선언 방식
     case historyCommentDelete(commentId: Int)
     case historyCommentUpdate(commentId: Int, data: HistoryCommentUpdateRequestDTO)
     case historyDelete(historyId: Int)
@@ -41,8 +41,8 @@ extension HistoryEndpoint: TargetType {
             return "/histories/like"
         case .historyComments(let historyId, _):
             return "/histories/\(historyId)/comments"
-        case .historyCommentWrite(let historyId, _):
-            return "/histories/\(historyId)/comments"
+        case .historyCommentWrite(let historyId, _):// 파라미터, Body(request)데이터 둘 다 있을 땐 파라미터만 적어주고 데이터 부분은 _언더바처리
+            return "/histories/\(historyId)/comments" // POST에 적혀 있는 주소 return
         case .historyCommentDelete(let commentId):
             return "/histories/comments/\(commentId)"
         case .historyCommentUpdate(let commentId, _):
@@ -89,7 +89,7 @@ extension HistoryEndpoint: TargetType {
         case .historyCommentWrite(_, let data):
             return .requestJSONEncodable(data)
         case .historyCommentDelete:
-            return .requestPlain
+            return .requestPlain//내가 서버로 보낼 바디가 없을때
         case .historyCommentUpdate(_, let data):
             return .requestJSONEncodable(data)
         case .historyDelete:

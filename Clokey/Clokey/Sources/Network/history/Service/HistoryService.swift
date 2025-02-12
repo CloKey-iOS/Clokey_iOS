@@ -17,7 +17,7 @@ public final class HistoryService: NetworkManager {
     public init(provider: MoyaProvider<HistoryEndpoint>? = nil) {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)),
-            AccessTokenPlugin()
+         //   AccessTokenPlugin()
         ]
         self.provider = provider ?? MoyaProvider<HistoryEndpoint>(plugins: plugins)
     }
@@ -78,6 +78,8 @@ public final class HistoryService: NetworkManager {
     }
     
     // 댓글 작성 POST API
+    //엔드포인트 느낌이랑 똑같이 적기
+    //completion 은
     public func historyCommentWrite(
         historyId: Int,
         data: HistoryCommentWriteRequestDTO,
