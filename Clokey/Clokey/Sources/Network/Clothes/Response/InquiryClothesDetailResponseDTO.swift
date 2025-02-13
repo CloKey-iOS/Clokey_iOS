@@ -69,3 +69,27 @@ public struct addClothesResponseDTO: Codable {
     public let id: CLong
 }
 
+// 유저 옷장 조회
+public struct GetClothesByCategoryResponseDTO: Codable {
+    public let clothPreviews: [ClothPreview]
+    public let totalPage: Int
+    public let totalElements: CLong
+    public let first: Bool
+    public let last: Bool
+}
+
+public struct ClothPreview: Codable {
+    public let id: CLong
+    public let name: String
+    public let wearNum: Int
+    public let imageUrl: String
+}
+
+// 옷장에서 옷 이름과 브랜드로 검색
+public struct ClothSearchResponseDTO: Codable {
+    public let clothPreviews: [ClothPreview]
+    public let totalPage: Int
+    public let totalElements: CLong
+    public let isFirst: Bool
+    public let isLast: Bool
+}

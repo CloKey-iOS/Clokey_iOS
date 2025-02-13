@@ -6,21 +6,30 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RecordOOTDViewController: UIViewController {
     
-    // 해시태그 리스트
-    private var hashtags: [String] = []
-    
     // MARK: - Properties
+
+    let historyService = HistoryService()
+    
+    // 기록 작성 리스트 변수들
+    private var hashtags: [String] = []
+    private var selectedImages: [UIImage] = []
+    private var taggedItems: [(id: Int, image: UIImage, title: String)] = []
+    private var contentText: String = ""
+    private var isPublic: Bool = true
+    private var selectedDate: Date?
+        
+    func setDate(_ date: Date) {
+        self.selectedDate = date
+    }
+    
     private let mainView = RecordOOTDView()
     private let navBarManager = NavigationBarManager()
     
-    // 선택한 사진
-    private var selectedImages: [UIImage] = []
-    
-    // 선택한 옷
-    private var taggedItems: [(image: UIImage, title: String)] = []
+    weak var delegate: RecordOOTDViewControllerDelegate?
     
     // MARK: - Lifecycle
     override func loadView() {
@@ -93,6 +102,35 @@ class RecordOOTDViewController: UIViewController {
         mainView.updateCollectionViewHeight(hasImages)
     }
     
+    // 수정할 기록 데이터 불러오기
+    func setEditData(_ viewModel: CalendarDetailViewModel) {
+        self.contentText = viewModel.content
+        self.selectedDate = convertStringToDate(viewModel.date)
+
+        // 내용 설정
+        mainView.contentInputView.textAddBox.text = viewModel.content
+        mainView.contentInputView.textAddBox.textColor = viewModel.content.isEmpty ? .placeholderText : .black
+
+        // 해시태그 설정
+        let hashtagsArray = viewModel.hashtags.components(separatedBy: "#")
+            .filter { !$0.isEmpty } // 빈 문자열 제거
+            .map { "#\($0)" } // "#"을 다시 붙여 원본 형태 복원
+
+        hashtagsArray.forEach { tag in
+            self.hashtags.append(tag)
+            mainView.contentInputView.addHashtag(tag)
+        }
+        
+        // 공개 여부 설정
+        mainView.contentInputView.publicButton.isSelected = viewModel.visibility
+        mainView.contentInputView.privateButton.isSelected = !viewModel.visibility
+
+        // 이미지 및 태그한 옷 설정 (비동기 로드)
+        loadImages(from: viewModel.images)
+        loadTaggedClothes(from: viewModel.cloths)
+    }
+
+    
     // MARK: - Actions
     // 뒤로가기
     @objc private func didTapBackButton() {
@@ -121,12 +159,47 @@ class RecordOOTDViewController: UIViewController {
     @objc override func dismissKeyboard() {
         view.endEditing(true) // 편집 상태 종료
     }
-    
+
     // 기록하기의 확인 버튼
     @objc private func didTapOOTDButton() {
-        // 버튼 상태에 따라 기능 작동/미작동
         if mainView.OOTDButton.isEnabled {
-            navigationController?.popViewController(animated: true)
+            let content = mainView.contentInputView.textAddBox.text ?? ""
+            let clothesIds = taggedItems.map { Int64($0.id) }
+            let visibility = mainView.contentInputView.publicButton.isSelected ? "PUBLIC" : "PRIVATE"
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateString = selectedDate.map { dateFormatter.string(from: $0) } ?? "2025-02-08"
+
+            let requestDTO = HistoryCreateRequestDTO(
+                content: content,
+                clothes: clothesIds,
+                hashtags: hashtags,
+                visibility: visibility,
+                date: dateString
+            )
+            
+            // 이미지 압축 및 크기 제한
+            let imageDataArray = selectedImages.compactMap { image in
+                return image.jpegData(compressionQuality: 1.0)
+            }
+            
+            let historyService = HistoryService()
+            historyService.historyCreate(data: requestDTO, images: imageDataArray) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let response):
+                    print("History created successfully with ID: \(response.historyId)")
+                    DispatchQueue.main.async {
+                        self.delegate?.didUpdateHistory()  // 새로고침
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
+                case .failure(let error):
+                    print("Failed to create history: \(error)")
+                }
+            }
         }
     }
 }
@@ -164,7 +237,15 @@ extension RecordOOTDViewController: UICollectionViewDataSource {
             cell.deleteButtonTapHandler = { [weak self] in
                 guard let self = self else { return }
                 self.selectedImages.remove(at: indexPath.item)
-                collectionView.reloadData()
+                
+                // 컬렉션 뷰 상태 완전 초기화
+                self.mainView.photoTagView.imageCollectionView.reloadData()
+                
+                // 이미지가 모두 삭제되었을 때 컬렉션 뷰 상태 리셋
+                if self.selectedImages.isEmpty {
+                    self.mainView.photoTagView.imageCollectionView.setContentOffset(.zero, animated: true)
+                }
+                
                 self.updateCollectionViewHeight(!self.selectedImages.isEmpty)
             }
             
@@ -260,14 +341,27 @@ extension RecordOOTDViewController: CustomGalleryViewControllerDelegate {
 // 이미지 편집 완료 결과 처리
 extension RecordOOTDViewController: PhotoEditViewControllerDelegate {
     func photoEditViewController(_ viewController: PhotoEditViewController, didFinishEditing images: [UIImage]) {
+        
         selectedImages = images
+        mainView.photoTagView.imageCollectionView.setContentOffset(.zero, animated: false)
+
         mainView.photoTagView.imageCollectionView.reloadData()
         updateCollectionViewHeight(!images.isEmpty) // 이미지가 있으면 컬렉션 뷰 높이 설정, 없으면 숨김
+        mainView.photoTagView.layoutIfNeeded()
     }
 }
 
-// 해시태그 추가/삭제 이벤트 처리
+// 전송할 리스트 이벤트
 extension RecordOOTDViewController: ContentInputViewDelegate {
+    
+    func contentInputView(_ view: ContentInputView, didUpdateText text: String) {
+        self.contentText = text
+    }
+    
+    func contentInputView(_ view: ContentInputView, didTogglePublic isPublic: Bool) {
+        self.isPublic = isPublic
+    }
+    
     // 해시태그 추가
     func contentInputView(_ view: ContentInputView, didAddHashtag hashtag: String) {
         hashtags.append(hashtag)
@@ -304,7 +398,8 @@ extension RecordOOTDViewController: UICollectionViewDelegate {
 // MARK: - TagClothViewControllerDelegate
 // TagClothViewController에서 선택한 옷 데이터 받기
 extension RecordOOTDViewController: TagClothViewControllerDelegate {
-    func didSelectTags(_ tags: [(image: UIImage, title: String)]) {
+
+    func didSelectTags(_ tags: [(id: Int, image: UIImage, title: String)]) {
         self.taggedItems = tags
         
         // 컬렉션 뷰를 새로고침 해서 UI 업데이트
@@ -319,5 +414,76 @@ extension RecordOOTDViewController: TagClothViewControllerDelegate {
         } else {
             mainView.OOTDButton.setEnabled(false)
         }
+    }
+}
+
+// 수정하기 - 데이터 불러오기
+extension RecordOOTDViewController {
+    /*
+     Mutation of captured var in concurrently-executing code 오류
+     - swift5까지는 클로저 내부에서 외부 변수를 참조한 변수들을 여러 스레드에서 동시에 수정하는 것이 가능했음.
+     - 그러나 이 방식은 데이터 경쟁(Race Condition)을 발생할 가능성이 높아 swift6 부터는 금지함.
+     - DispatchQueue를 생성하여 loadedImages.append() 작업을 동기적으로 실행되게 수정하여 경쟁 상태 예방.
+    */
+    // 태그한 옷 불러오기
+    func loadTaggedClothes(from cloths: [CalendarDetailViewModel.ClothDTO]) {
+        // 비동기 네트워크 요청 관리를 위한 DispatchGroup 생성
+        let dispatchGroup = DispatchGroup()
+        var loadedClothes: [(id: Int, image: UIImage, title: String)] = []
+        let syncQueue = DispatchQueue(label: "clothSyncQueue")
+
+        for cloth in cloths {
+            if let url = URL(string: cloth.imageUrl) {
+                dispatchGroup.enter()
+                KingfisherManager.shared.retrieveImage(with: url) { result in
+                    switch result {
+                    case .success(let imageResult):
+                        syncQueue.sync { // 동기적으로 실행
+                            loadedClothes.append((id: cloth.clothId, image: imageResult.image, title: cloth.name))
+                        }
+                    case .failure(let error):
+                        print("옷 이미지 로드 실패: \(error)")
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        // 모든 비동기 요청이 완료된 후 메인 스레드에서 실행
+        dispatchGroup.notify(queue: .main) {
+            self.taggedItems = loadedClothes
+            self.mainView.photoTagView.tagCollectionView.reloadData()
+            self.mainView.photoTagView.updateTagCollectionViewHeight(!loadedClothes.isEmpty)
+        }
+    }
+
+    // 이미지 로드 - kingfisher 사용
+    func loadImages(from urls: [String]) {
+        let dispatchGroup = DispatchGroup()
+        var loadedImages: [UIImage] = []
+        let syncQueue = DispatchQueue(label: "imageSyncQueue")
+
+        for urlString in urls {
+            if let url = URL(string: urlString) {
+                dispatchGroup.enter()
+                KingfisherManager.shared.retrieveImage(with: url) { result in
+                    switch result {
+                    case .success(let imageResult):
+                        syncQueue.sync { // 동기적으로 실행
+                            loadedImages.append(imageResult.image)
+                        }
+                    case .failure(let error):
+                        print("이미지 로드 실패: \(error)")
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        // 모든 비동기 요청이 완료된 후 메인 스레드에서 실행
+        dispatchGroup.notify(queue: .main) {
+            self.selectedImages = loadedImages
+            self.mainView.photoTagView.imageCollectionView.reloadData()
+            self.mainView.updateCollectionViewHeight(!loadedImages.isEmpty)
+        }
+        mainView.OOTDButton.setEnabled(true)
     }
 }
