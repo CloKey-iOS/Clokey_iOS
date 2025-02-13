@@ -1,29 +1,34 @@
 //
-//  FolderDropdownView.swift
+//  DrawerDropdownView.swift
 //  Clokey
 //
 //  Created by 한태빈 on 2/8/25.
 //
+
 import UIKit
 import SnapKit
 import Then
 
-class FolderDropdownView: UIView, UITableViewDataSource, UITableViewDelegate {
+class DrawerDropdownView: UIView, UITableViewDataSource, UITableViewDelegate{
     
-    private let options = ["폴더명 변경하기", "아이템 추가하기", "아이템 삭제하기"]
+    // 옵션 버튼 목록
+    private let options = ["폴더 편집하기", "폴더 삭제하기"]
     
+    // 테이블 뷰
     private let tableView = UITableView().then {
-        $0.register(FolderDropdownCell.self, forCellReuseIdentifier: "FolderDropdownCell")
+        $0.register(DrawerDropdownCell.self, forCellReuseIdentifier: "DrawerDropdownCell")
         $0.separatorStyle = .none
         $0.isScrollEnabled = false
         $0.layer.cornerRadius = 10
         $0.backgroundColor = .white
-        $0.rowHeight = 44
-        $0.estimatedRowHeight = 44
+        $0.rowHeight = 37
+        $0.estimatedRowHeight = 37
     }
     
+    // 버튼 클릭 시 동작할 핸들러
     var didSelectOption: ((String) -> Void)?
-
+    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -33,6 +38,7 @@ class FolderDropdownView: UIView, UITableViewDataSource, UITableViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
     private func setupView() {
         backgroundColor = .white
         layer.cornerRadius = 10
@@ -49,25 +55,27 @@ class FolderDropdownView: UIView, UITableViewDataSource, UITableViewDelegate {
             $0.edges.equalToSuperview()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
+    
+    // MARK: - UITableView DataSource & Delegate
 
+    // 테이블 뷰의 셀 개수 반환 -> options.count로 반환
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FolderDropdownCell", for: indexPath) as! FolderDropdownCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DrawerDropdownCell", for: indexPath) as! DrawerDropdownCell
         cell.configure(with: options[indexPath.row], isLast: indexPath.row == options.count - 1)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         didSelectOption?(options[indexPath.row])
     }
 }
 
-
 // MARK: - Dropdown Cell
-class FolderDropdownCell: UITableViewCell {
+class DrawerDropdownCell: UITableViewCell {
     
     private let titleLabel = UILabel().then {
         $0.textColor = .black
@@ -107,7 +115,7 @@ class FolderDropdownCell: UITableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(iconImageView.snp.trailing).offset(8)
+            $0.leading.equalTo(iconImageView.snp.trailing).offset(10)
         }
         
         separatorView.snp.makeConstraints {
@@ -119,8 +127,9 @@ class FolderDropdownCell: UITableViewCell {
     
     func configure(with title: String, isLast: Bool) {
         titleLabel.text = title
-        iconImageView.image = title == "폴더명 변경하기" ? UIImage(systemName: "pencil") : (title == "아이템 추가하기" ? UIImage(systemName: "plus") : UIImage(systemName: "trash"))
+        iconImageView.image = title == "폴더 편집하기" ? UIImage(systemName: "write_icon") : UIImage(systemName: "trash_icon")
         iconImageView.tintColor = UIColor.mainBrown800
+        
         separatorView.isHidden = isLast
     }
 }
