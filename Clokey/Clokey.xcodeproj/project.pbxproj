@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		070258B82D31083D00065369 /* AddClothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B72D31083D00065369 /* AddClothView.swift */; };
 		070258BA2D31084300065369 /* AddClothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258B92D31084300065369 /* AddClothViewController.swift */; };
-		070258BE2D31085900065369 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BD2D31085900065369 /* ClosetView.swift */; };
-		070258C02D31086A00065369 /* ClosetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070258BF2D31086A00065369 /* ClosetViewController.swift */; };
 		070916512D58BEE1008DC9EE /* HomeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070916492D58BEE1008DC9EE /* HomeEndPoint.swift */; };
 		070916522D58BEE1008DC9EE /* OneYearAgoHistoriesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0709164C2D58BEE1008DC9EE /* OneYearAgoHistoriesResponseDTO.swift */; };
 		070916532D58BEE1008DC9EE /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0709164E2D58BEE1008DC9EE /* HomeService.swift */; };
@@ -139,7 +137,6 @@
 		07ECCB632D4E35FE00AFF486 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB622D4E35FE00AFF486 /* RxBlocking */; };
 		07ECCB652D4E35FE00AFF486 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB642D4E35FE00AFF486 /* RxCocoa */; };
 		07ECCB672D4E35FE00AFF486 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECCB662D4E35FE00AFF486 /* RxRelay */; };
-		07ECCE092D4E44E300AFF486 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 07ECCE082D4E44E300AFF486 /* Config.xcconfig */; };
 		07ECCEA32D4E79C000AFF486 /* CalendarImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCEA22D4E79C000AFF486 /* CalendarImageCell.swift */; };
 		07ECCEA52D4E7AE400AFF486 /* CalendarCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCEA42D4E7AE400AFF486 /* CalendarCommentView.swift */; };
 		07ECCEA72D4E7ECA00AFF486 /* CalendarCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECCEA62D4E7ECA00AFF486 /* CalendarCommentViewController.swift */; };
@@ -152,9 +149,11 @@
 		1E7C58712D5D2494004E34D8 /* FolderRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C58702D5D2494004E34D8 /* FolderRequestDTO.swift */; };
 		1E7C58732D5D2702004E34D8 /* FolderResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C58722D5D2702004E34D8 /* FolderResponseDTO.swift */; };
 		1E7C58752D5D2D45004E34D8 /* FolderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C58742D5D2D45004E34D8 /* FolderEndpoint.swift */; };
+		1E7C594D2D5DDCD9004E34D8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */; };
+		1E7C594F2D5DF29A004E34D8 /* FolderDropdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */; };
 		1EE6BAA82D5783D0006F8D14 /* FolderDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */; };
 		1EE6BAAF2D5783D0006F8D14 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */; };
-		1EE6BAB02D5783D0006F8D14 /* DrawerDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */; };
+		1EE6BAB02D5783D0006F8D14 /* PopUpDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */; };
 		A62A429E2D4D2ADE00672D3F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429A2D4D2ADE00672D3F /* MainView.swift */; };
 		A62A429F2D4D2ADE00672D3F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429C2D4D2ADE00672D3F /* HeaderView.swift */; };
 		A62A42A02D4D2ADE00672D3F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62A429B2D4D2ADE00672D3F /* MainViewController.swift */; };
@@ -168,8 +167,6 @@
 		070258A12D30DD0E00065369 /* Clokey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clokey.entitlements; sourceTree = "<group>"; };
 		070258B72D31083D00065369 /* AddClothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothView.swift; sourceTree = "<group>"; };
 		070258B92D31084300065369 /* AddClothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothViewController.swift; sourceTree = "<group>"; };
-		070258BD2D31085900065369 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
-		070258BF2D31086A00065369 /* ClosetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetViewController.swift; sourceTree = "<group>"; };
 		070916492D58BEE1008DC9EE /* HomeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEndPoint.swift; sourceTree = "<group>"; };
 		0709164C2D58BEE1008DC9EE /* OneYearAgoHistoriesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneYearAgoHistoriesResponseDTO.swift; sourceTree = "<group>"; };
 		0709164E2D58BEE1008DC9EE /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -279,7 +276,6 @@
 		07ECCB592D4E351E00AFF486 /* CustomSortDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSortDropdownView.swift; sourceTree = "<group>"; };
 		07ECCB5A2D4E351E00AFF486 /* CustomTotalSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTotalSegmentView.swift; sourceTree = "<group>"; };
 		07ECCB5B2D4E351E00AFF486 /* CustomCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryModel.swift; sourceTree = "<group>"; };
-		07ECCE082D4E44E300AFF486 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		07ECCEA22D4E79C000AFF486 /* CalendarImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImageCell.swift; sourceTree = "<group>"; };
 		07ECCEA42D4E7AE400AFF486 /* CalendarCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCommentView.swift; sourceTree = "<group>"; };
 		07ECCEA62D4E7ECA00AFF486 /* CalendarCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCommentViewController.swift; sourceTree = "<group>"; };
@@ -293,7 +289,9 @@
 		1E7C58702D5D2494004E34D8 /* FolderRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRequestDTO.swift; sourceTree = SOURCE_ROOT; };
 		1E7C58722D5D2702004E34D8 /* FolderResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderResponseDTO.swift; sourceTree = SOURCE_ROOT; };
 		1E7C58742D5D2D45004E34D8 /* FolderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEndpoint.swift; sourceTree = SOURCE_ROOT; };
-		1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerDropdownView.swift; sourceTree = "<group>"; };
+		1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDropdownViewController.swift; sourceTree = "<group>"; };
+		1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDropdownView.swift; sourceTree = "<group>"; };
 		1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDropdownView.swift; sourceTree = "<group>"; };
 		1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		A62A429A2D4D2ADE00672D3F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -333,11 +331,6 @@
 		A62A42932D4D2A8D00672D3F /* My */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = My;
-			sourceTree = "<group>";
-		};
-		A64C54312D3F97B3000CCB62 /* Cells */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -657,7 +650,6 @@
 		07649BE22D4DDAE600B6B2B2 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				A64C54312D3F97B3000CCB62 /* Cells */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1019,7 +1011,7 @@
 				07E1CB902D3814AA00F86BB8 /* LaunchScreen.storyboard */,
 				07E1CB2F2D364BD100F86BB8 /* Fonts */,
 				076FAB322D2E6E0200FF3979 /* Assets.xcassets */,
-				07ECCE082D4E44E300AFF486 /* Config.xcconfig */,
+				1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1271,9 +1263,10 @@
 		1EE6BAA02D5783D0006F8D14 /* ExtraView */ = {
 			isa = PBXGroup;
 			children = (
-				1EE6BA9B2D5783D0006F8D14 /* DrawerDropdownView.swift */,
+				1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */,
 				1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */,
 				1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */,
+				1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */,
 			);
 			name = ExtraView;
 			path = Clokey/Sources/Feature/Closet/ExtraView;
@@ -1313,7 +1306,6 @@
 				1E7C58792D5DC0E8004E34D8 /* Category */,
 				A62A428F2D4D2A8D00672D3F /* Your */,
 				A62A42932D4D2A8D00672D3F /* My */,
-				A64C54312D3F97B3000CCB62 /* Cells */,
 			);
 			name = Clokey;
 			packageProductDependencies = (
@@ -1397,7 +1389,7 @@
 				07E1CB3A2D364BDA00F86BB8 /* Pretendard-Thin.otf in Resources */,
 				07E1CB3B2D364BDA00F86BB8 /* Pretendard-Black.otf in Resources */,
 				07E1CB3C2D364BDA00F86BB8 /* Pretendard-ExtraBold.otf in Resources */,
-				07ECCE092D4E44E300AFF486 /* Config.xcconfig in Resources */,
+				1E7C594D2D5DDCD9004E34D8 /* Config.xcconfig in Resources */,
 				07E1CB3D2D364BDA00F86BB8 /* Pretendard-Bold.otf in Resources */,
 				07E1CB3E2D364BDA00F86BB8 /* Pretendard-Light.otf in Resources */,
 				07E1CB3F2D364BDA00F86BB8 /* Pretendard-ExtraLight.otf in Resources */,
@@ -1415,14 +1407,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070258BE2D31085900065369 /* ClosetView.swift in Sources */,
 				07CF63E52D55DE6900CCF9F4 /* CalendarDetailViewModel.swift in Sources */,
 				076FAB4E2D2EBB3A00FF3979 /* KakaoAuthService.swift in Sources */,
 				0709165D2D58BEE1008DC9EE /* ClothesEndpoint.swift in Sources */,
 				0709165E2D58BEE1008DC9EE /* AddClothesRequestDTO.swift in Sources */,
 				0709165F2D58BEE1008DC9EE /* InquiryClothesDetailResponseDTO.swift in Sources */,
 				070916602D58BEE1008DC9EE /* ClothesService.swift in Sources */,
-				070258C02D31086A00065369 /* ClosetViewController.swift in Sources */,
 				A6548E532D3F47DE00F79B66 /* WeatherAPI.swift in Sources */,
 				07ECCEB02D4EAEF700AFF486 /* LikeUserCell.swift in Sources */,
 				0744FFD92D5B1E0700E60282 /* UpdateFriendCalendarView.swift in Sources */,
@@ -1466,7 +1456,7 @@
 				07ECCB512D4E34DF00AFF486 /* CalendarHelper.swift in Sources */,
 				1EE6BAA82D5783D0006F8D14 /* FolderDropdownView.swift in Sources */,
 				1EE6BAAF2D5783D0006F8D14 /* PopUpView.swift in Sources */,
-				1EE6BAB02D5783D0006F8D14 /* DrawerDropdownView.swift in Sources */,
+				1EE6BAB02D5783D0006F8D14 /* PopUpDropdownView.swift in Sources */,
 				07649C2B2D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift in Sources */,
 				076FAB3F2D2E6E0200FF3979 /* AppDelegate.swift in Sources */,
 				07E1CB4B2D3668CE00F86BB8 /* Constants.swift in Sources */,
@@ -1498,6 +1488,7 @@
 				0744011E2D5CB9EB00E60282 /* AddCategoryView.swift in Sources */,
 				0744011F2D5CB9EB00E60282 /* AddCategoryViewController.swift in Sources */,
 				074401202D5CB9EB00E60282 /* AddCategoryModel.swift in Sources */,
+				1E7C594F2D5DF29A004E34D8 /* FolderDropdownViewController.swift in Sources */,
 				074401212D5CB9EB00E60282 /* AddCategoryHeaderView.swift in Sources */,
 				074401222D5CB9EB00E60282 /* AddCategoryViewCollectionViewCell.swift in Sources */,
 				07649EEC2D4DE58900B6B2B2 /* HistoryRequestDTO.swift in Sources */,
@@ -1555,7 +1546,7 @@
 /* Begin XCBuildConfiguration section */
 		07F093242D24183A0075659F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07ECCE082D4E44E300AFF486 /* Config.xcconfig */;
+			baseConfigurationReference = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1589,7 +1580,7 @@
 		};
 		07F093252D24183A0075659F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07ECCE082D4E44E300AFF486 /* Config.xcconfig */;
+			baseConfigurationReference = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1623,7 +1614,7 @@
 		};
 		07F093262D24183A0075659F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07ECCE082D4E44E300AFF486 /* Config.xcconfig */;
+			baseConfigurationReference = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1687,7 +1678,7 @@
 		};
 		07F093272D24183A0075659F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07ECCE082D4E44E300AFF486 /* Config.xcconfig */;
+			baseConfigurationReference = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

@@ -8,17 +8,17 @@
 import Foundation
 
 //// 폴더별 옷 조회
-public struct FolderCheckResponseDTO: Codable {
-    public let clothes: [ClothDTO]
-}
-
-public struct ClothDTO: Codable {
-    public let clothId: Int
-    public let clothname: String
-    public let imageUrl: String
-    public let clothCount: Int64
-    
-}
+//public struct FolderCheckResponseDTO: Codable {
+//    public let clothes: [ClothDTO]
+//}
+//
+//public struct ClothDTO: Codable {
+//    public let clothId: Int
+//    public let clothname: String
+//    public let imageUrl: String
+//    public let clothCount: Int64
+//    
+//}
 
 // 전체 폴더
 public struct FolderAllResponseDTO: Codable {

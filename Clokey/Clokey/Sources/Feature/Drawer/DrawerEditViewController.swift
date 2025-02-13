@@ -96,7 +96,7 @@ class DrawerEditViewController: UIViewController, UICollectionViewDataSource, UI
         
         navBarManager.setTitle(
             to: navigationItem,
-            title: "편집하기",
+            title: "아이템 선택하기",
             font: .ptdBoldFont(ofSize: 20),
             textColor: .black
         )

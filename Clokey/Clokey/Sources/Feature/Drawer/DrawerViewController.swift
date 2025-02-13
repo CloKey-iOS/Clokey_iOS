@@ -20,7 +20,14 @@ class DrawerViewController: UIViewController, UICollectionViewDataSource, UIColl
     
 
     @objc private func editButtonTapped() {
-        
+        guard let navController = navigationController else { return }
+        let dropdownTop = navigationController!.navigationBar.frame.maxY + 5
+        let dropdownVC = FolderDropDownViewController()
+        dropdownVC.dropdownTop = dropdownTop
+        dropdownVC.parentNav = navController  // 부모 네비게이션 컨트롤러 설정
+        dropdownVC.modalPresentationStyle = .overCurrentContext
+        dropdownVC.modalTransitionStyle = .crossDissolve
+        present(dropdownVC, animated: true, completion: nil)
     }
 
     
@@ -72,7 +79,18 @@ class DrawerViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        // 탭바 컨트롤러가 있는 경우, Closet 탭(예: index 0)으로 전환
+        if let tabBarController = self.tabBarController {
+            tabBarController.selectedIndex = 3
+            
+            // Closet 탭의 네비게이션 컨트롤러가 있다면 스택을 초기화
+            if let closetNav = tabBarController.viewControllers?[0] as? UINavigationController {
+                closetNav.popToRootViewController(animated: true)
+            }
+        } else {
+            // 탭바가 없다면 현재 네비게이션 스택의 root로 pop
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     // MARK: - UICollectionViewDataSource
