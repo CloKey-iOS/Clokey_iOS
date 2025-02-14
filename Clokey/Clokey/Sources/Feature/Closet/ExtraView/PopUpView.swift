@@ -222,7 +222,7 @@ class TouchPopupView: UIView {
         }
 
         optionButton.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(19)
+            make.top.equalToSuperview().offset(67)
             make.trailing.equalToSuperview().offset(-21)
             make.width.equalTo(24)
             make.height.equalTo(24)

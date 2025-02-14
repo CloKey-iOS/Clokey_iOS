@@ -25,12 +25,12 @@ struct DrawerModel {
         ]
  */
         return [
-            DrawerModel(image: .top, name: "for 데이트", item: "6 벌"),
-            DrawerModel(image: .top, name: "for 집 앞 마실", item: "4 벌"),
-            DrawerModel(image: .top, name: "for 전공", item: "5 벌"),
-            DrawerModel(image: .top, name: "for 교양", item: "6 벌"),
-            DrawerModel(image: .top, name: "for 술자리", item: "4 벌"),
-            DrawerModel(image: .top, name: "for 공식적인 자리", item: "5 벌")
+            DrawerModel(image: .top, name: "일이삼사오육칠팔", item: "6 벌"),
+            DrawerModel(image: .top, name: "abcdefghijk", item: "4 벌"),
+            DrawerModel(image: .top, name: "123456789", item: "5 벌"),
+            DrawerModel(image: .top, name: "일1이2삼3사4오5", item: "6 벌"),
+            DrawerModel(image: .top, name: "a일b2삼c사d오e", item: "4 벌"),
+            DrawerModel(image: .top, name: "일 이 삼 c d e r 팔", item: "5 벌")
         ]
     }
 }

@@ -151,6 +151,8 @@
 		1E7C58752D5D2D45004E34D8 /* FolderEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C58742D5D2D45004E34D8 /* FolderEndpoint.swift */; };
 		1E7C594D2D5DDCD9004E34D8 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */; };
 		1E7C594F2D5DF29A004E34D8 /* FolderDropdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */; };
+		1E7C59532D5E2252004E34D8 /* PopUpDropdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C59522D5E2252004E34D8 /* PopUpDropdownViewController.swift */; };
+		1E7C59552D5FD407004E34D8 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C59542D5FD407004E34D8 /* PopUpViewController.swift */; };
 		1EE6BAA82D5783D0006F8D14 /* FolderDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */; };
 		1EE6BAAF2D5783D0006F8D14 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */; };
 		1EE6BAB02D5783D0006F8D14 /* PopUpDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */; };
@@ -291,6 +293,8 @@
 		1E7C58742D5D2D45004E34D8 /* FolderEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEndpoint.swift; sourceTree = SOURCE_ROOT; };
 		1E7C594C2D5DDCD9004E34D8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDropdownViewController.swift; sourceTree = "<group>"; };
+		1E7C59522D5E2252004E34D8 /* PopUpDropdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDropdownViewController.swift; sourceTree = "<group>"; };
+		1E7C59542D5FD407004E34D8 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDropdownView.swift; sourceTree = "<group>"; };
 		1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDropdownView.swift; sourceTree = "<group>"; };
 		1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
@@ -1264,9 +1268,11 @@
 			isa = PBXGroup;
 			children = (
 				1EE6BA9B2D5783D0006F8D14 /* PopUpDropdownView.swift */,
+				1E7C59542D5FD407004E34D8 /* PopUpViewController.swift */,
 				1EE6BA9D2D5783D0006F8D14 /* FolderDropdownView.swift */,
 				1EE6BA9E2D5783D0006F8D14 /* PopUpView.swift */,
 				1E7C594E2D5DF29A004E34D8 /* FolderDropdownViewController.swift */,
+				1E7C59522D5E2252004E34D8 /* PopUpDropdownViewController.swift */,
 			);
 			name = ExtraView;
 			path = Clokey/Sources/Feature/Closet/ExtraView;
@@ -1466,9 +1472,11 @@
 				07649FFA2D4DEA9000B6B2B2 /* AccessTokenPlugin.swift in Sources */,
 				07E1CB5F2D36A10000F86BB8 /* CustomButton.swift in Sources */,
 				07E1CB602D36A10000F86BB8 /* CustomButtonTextField.swift in Sources */,
+				1E7C59532D5E2252004E34D8 /* PopUpDropdownViewController.swift in Sources */,
 				07649EE32D4DE58900B6B2B2 /* CookiePlugin.swift in Sources */,
 				07649EE42D4DE58900B6B2B2 /* MembersService.swift in Sources */,
 				0744FFD72D5B1DD500E60282 /* NewsView.swift in Sources */,
+				1E7C59552D5FD407004E34D8 /* PopUpViewController.swift in Sources */,
 				0744FFD82D5B1DD500E60282 /* ImageView.swift in Sources */,
 				07649EE52D4DE58900B6B2B2 /* MembersLoginResponseDTO.swift in Sources */,
 				0744FFAC2D5B1D6900E60282 /* PickPopUpView.swift in Sources */,

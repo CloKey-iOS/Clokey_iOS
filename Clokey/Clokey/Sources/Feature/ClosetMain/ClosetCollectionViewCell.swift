@@ -1,15 +1,17 @@
 import Foundation
 import UIKit
+import SnapKit
+import Then
 
 class ClosetCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ClosetCollectionViewCell"
     
-    // 체크 기능 on/off
+    // 체크 기능 on/off 플래그 (선택 가능 여부)
     var isSelectable: Bool = false {
         didSet {
-            overlayView.isHidden = !isSelectable
-            checkmarkImageView.isHidden = !isSelectable
+            overlayView.isHidden = true
+            checkmarkImageView.isHidden = true
         }
     }
         
@@ -61,6 +63,7 @@ class ClosetCollectionViewCell: UICollectionViewCell {
     private let checkmarkImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "check_circle_icon")
+        imageView.contentMode = .scaleAspectFit
         imageView.isHidden = true
         return imageView
     }()
@@ -133,6 +136,7 @@ class ClosetCollectionViewCell: UICollectionViewCell {
     
     // 선택/해제 메서드
     func setSelected(_ isSelected: Bool) {
+        // 만약 셀이 선택 가능하지 않다면 UI 업데이트를 하지 않음
         guard isSelectable else { return }
         overlayView.isHidden = !isSelected
         checkmarkImageView.isHidden = !isSelected

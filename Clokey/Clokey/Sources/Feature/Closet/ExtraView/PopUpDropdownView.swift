@@ -18,7 +18,7 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 드롭다운 내 리스트를 표시하는 UITableView
     private let tableView = UITableView().then {
-        $0.register(FolderDropdownCell.self, forCellReuseIdentifier: "PopUpDropdownCell")
+        $0.register(PopUpDropdownCell.self, forCellReuseIdentifier: "PopUpDropdownCell")
         $0.separatorStyle = .none  // 기본 separator 제거
         $0.isScrollEnabled = false // 스크롤 비활성화
         $0.layer.cornerRadius = 10
@@ -38,7 +38,7 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
     // 옵션 선택 시 동작할 delegate
     weak var delegate: PopUpDropdownViewDelegate?
     
-    // 전체 사이즈: width 143, height 75
+    // 전체 사이즈: width 92, height 64
     override var intrinsicContentSize: CGSize {
         return CGSize(width: 92, height: 64)
     }
@@ -84,7 +84,7 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // 셀 구성 (마지막 셀은 구분선 숨김 처리)
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PopUpDropdownCell", for: indexPath) as! FolderDropdownCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PopUpDropdownCell", for: indexPath) as! PopUpDropdownCell
         let option = options[indexPath.row]
         let isLast = indexPath.row == options.count - 1
         cell.configure(with: option, isSelected: option == selectedOption, isLast: isLast)
@@ -96,11 +96,11 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
         selectedOption = options[indexPath.row]
         
         if indexPath.row == 0 {
-            // "폴더 편집하기" 선택: DrawerEditViewController로 이동
-            delegate?.didSelectEditFolder()
+            // "편집하기" 선택: 옷추가 관련 controller로
+            delegate?.didSelectEditCloth()
         } else if indexPath.row == 1 {
-            // "폴더 삭제하기" 선택: ClosetViewController로 이동
-            delegate?.didSelectDeleteFolder()
+            // "삭제하기" 선택: 삭제되고 팝업창 꺼짐
+            delegate?.didSelectDeleteCloth()
         }
         
         tableView.reloadData() // UI 업데이트
@@ -108,7 +108,7 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - 커스텀 셀 클래스
     
-    class FolderDropdownCell: UITableViewCell {
+    class PopUpDropdownCell: UITableViewCell {
         
         
         
@@ -120,7 +120,7 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
         // 옵션 라벨
         private let titleLabel = UILabel().then {
             $0.textColor = .black
-            $0.font = UIFont.ptdMediumFont(ofSize: 14)
+            $0.font = UIFont.ptdMediumFont(ofSize: 12)
         }
         
         // 리스트 구분선
@@ -152,14 +152,14 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
             
             iconImageView.snp.makeConstraints { make in
                         make.centerY.equalToSuperview()
-                        make.leading.equalToSuperview().offset(16)
+                        make.leading.equalToSuperview().offset(10)
                         make.width.height.equalTo(20) // 아이콘 크기 조정 가능
                     }
             
             // 옵션 라벨 제약
             titleLabel.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
-                make.leading.equalTo(iconImageView.snp.trailing).offset(8)
+                make.leading.equalTo(iconImageView.snp.trailing).offset(9)
             }
             
             // 구분선 제약 (마지막 셀인 경우 숨김)
@@ -175,11 +175,11 @@ class PopUpDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
             separatorView.isHidden = isLast
             
             // 옵션에 따라 아이콘 이미지 변경
-            if title == "폴더 편집하기" {
-                iconImageView.image = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate)
+            if title == "편집하기" {
+                iconImageView.image = UIImage(named: "write_icon")?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = UIColor.mainBrown800 // 기존 색상 사용
-            } else if title == "폴더 삭제하기" {
-                iconImageView.image = UIImage(systemName: "trash")?.withRenderingMode(.alwaysTemplate)
+            } else if title == "삭제하기" {
+                iconImageView.image = UIImage(named: "trash_icon")?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = UIColor.mainBrown800
             }
         }

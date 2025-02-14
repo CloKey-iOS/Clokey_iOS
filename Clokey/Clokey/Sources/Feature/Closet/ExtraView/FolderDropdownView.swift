@@ -176,10 +176,10 @@ class FolderDropdownView: UIView, UITableViewDelegate, UITableViewDataSource {
             
             // 옵션에 따라 아이콘 이미지 변경
             if title == "폴더 편집하기" {
-                iconImageView.image = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate)
+                iconImageView.image = UIImage(named: "write_icon")?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = UIColor.mainBrown800 // 기존 색상 사용
             } else if title == "폴더 삭제하기" {
-                iconImageView.image = UIImage(systemName: "trash")?.withRenderingMode(.alwaysTemplate)
+                iconImageView.image = UIImage(named: "trash_icon")?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = UIColor.mainBrown800
             }
         }
