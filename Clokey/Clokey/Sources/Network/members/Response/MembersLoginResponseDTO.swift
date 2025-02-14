@@ -10,7 +10,7 @@ import Foundation
 // 애플 로그인, 카카오 로그인, 약관 동의, 프로필 수정, 아이디 중복 확인 DTO 모음
 
 // 카카오 로그인
-public struct KakaoLoginResponseDTO: Codable {
+public struct LoginResponseDTO: Codable {
     public let id: Int
     public let email: String
     public let nickname: String

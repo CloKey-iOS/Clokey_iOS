@@ -37,9 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
             if granted {
-                print("✅ 푸시 알림 권한 허용됨")
+                print("푸시 알림 권한 허용됨")
             } else {
-                print("❌ 푸시 알림 권한 거부됨")
+                print("푸시 알림 권한 거부됨")
             }
         }
         
@@ -52,12 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // APNs 디바이스 토큰 받기
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-        print("📌 APNs Device Token: \(tokenString)")
+        print("APNs Device Token: \(tokenString)")
         Messaging.messaging().apnsToken = deviceToken
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("❌ APNs 등록 실패: \(error.localizedDescription)")
+        print("APNs 등록 실패: \(error.localizedDescription)")
     }
 }
 
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else { return }
-        print("📌 FCM Token: \(fcmToken)")
+        print("FCM Token: \(fcmToken)")
     }
 }
 

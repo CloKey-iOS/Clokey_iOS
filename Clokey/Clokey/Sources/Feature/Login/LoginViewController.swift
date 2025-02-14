@@ -15,10 +15,7 @@ import AuthenticationServices
 protocol Coordinator: AnyObject {
     func switchToMain()
     func getPresentationAnchor() -> ASPresentationAnchor
-    
-    //
     func navigateToAgreement() // 약관동의 화면으로 이동
-    //
 }
 
 final class LoginViewController: UIViewController {
@@ -28,9 +25,10 @@ final class LoginViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private weak var coordinator: Coordinator?
     private let authService = KakaoAuthService.shared
+    let memberService = MembersService()
 
     // 로그인 상태 및 에러 메시지 관리
-    @Published private var isLoggedIn = false
+//    @Published private var isLoggedIn = false
     @Published private var errorMessage: String?
 
     // MARK: - Initialization
@@ -54,31 +52,31 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
     private func setupBindings() {
-        // 카카오 로그인 버튼 이벤트 설정
-        loginView.kakaoLoginButton.addTarget(
-            self,
-            action: #selector(kakaoLoginButtonTapped),
-            for: .touchUpInside
-        )
-        
-        // 애플 로그인 버튼 이벤트 설정
-        loginView.appleLoginButton.addTarget(
-            self,
-            action: #selector(appleLoginButtonTapped),
-            for: .touchUpInside
-        )
+    // 카카오 로그인 버튼 이벤트 설정
+    loginView.kakaoLoginButton.addTarget(
+        self,
+        action: #selector(kakaoLoginButtonTapped),
+        for: .touchUpInside
+    )
+    
+    // 애플 로그인 버튼 이벤트 설정
+    loginView.appleLoginButton.addTarget(
+        self,
+        action: #selector(appleLoginButtonTapped),
+        for: .touchUpInside
+    )
 
-        // 로그인 상태 변화 감지
-        $isLoggedIn
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoggedIn in
-                if isLoggedIn {
-//                    self?.navigateToMain()
-                    self?.navigateToAgreement()
-                }
-            }
-            .store(in: &cancellables)
+    // 로그인 상태 변화 감지
+//    $isLoggedIn
+//        .receive(on: DispatchQueue.main)
+//        .sink { [weak self] isLoggedIn in
+//            if isLoggedIn {
+//                self?.navigateToAgreement()
+//            }
+//        }
+//        .store(in: &cancellables)
     }
     
     // MARK: - Actions
@@ -104,7 +102,12 @@ final class LoginViewController: UIViewController {
         authorizationController.performRequests()
     }
 
-    // MARK: - Apple Login
+    // MARK: - Social Login
+    
+    // 카카오 로그인
+    private func sendKakaoLoginRequest(accessToken: String) {
+        handleSocialLogin(type: "kakao", accessToken: accessToken)
+    }
     
     // 애플 로그인 요청 생성
     private func createAppleLoginRequest() -> ASAuthorizationAppleIDRequest {
@@ -115,33 +118,27 @@ final class LoginViewController: UIViewController {
     }
     
     // 애플 로그인 결과 처리
-        private func handleAppleLoginResult(with credential: ASAuthorizationAppleIDCredential) {
-            guard let authorizationCode = credential.authorizationCode,
-                  let codeString = String(data: authorizationCode, encoding: .utf8) else {
-                errorMessage = "Failed to get authorization code"
-                return
-            }
-            
-            // 이메일 확인
-            if let email = credential.email {
-                print("Email: \(email)")
-            }
-            
-            print("Authorization Code: \(codeString)")
-            handleSuccessfulLogin()
+    private func handleAppleLoginResult(with credential: ASAuthorizationAppleIDCredential) {
+        guard let authorizationCode = credential.authorizationCode,
+              let codeString = String(data: authorizationCode, encoding: .utf8) else {
+            errorMessage = "Failed to get authorization code"
+            return
         }
+        
+        if let email = credential.email {
+            print("Email: \(email)")
+        }
+        print("Authorization Code: \(codeString)")
+        
+        handleSocialLogin(type: "apple", authorizationCode: codeString)
+    }
 
     // MARK: - Helpers
     
     // 로그인 성공
-    private func handleSuccessfulLogin() {
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-        isLoggedIn = true
-    }
-    
-    // 로그인 -> 메인
-//    private func navigateToMain() {
-//        coordinator?.switchToMain()
+//    private func handleSuccessfulLogin() {
+//        let isLoggedIn = UserDefaults.standard.set(true, forKey: "isLoggedIn")
+//        print("자동로그인 상태: \(isLoggedIn)\n")
 //    }
     
     //
@@ -155,67 +152,57 @@ final class LoginViewController: UIViewController {
     
     // MARK: - API
     
-    // Kakao Login
-    private func sendKakaoLoginRequest(accessToken: String) {
-        let requestDTO = KakaoLoginRequestDTO(type: "kakao", accessToken: accessToken)
-        let memberService = MembersService()
+    // 공동 로그인 처리
+    private func handleSocialLogin(type: String, accessToken: String? = nil, authorizationCode: String? = nil) {
+        let requestDTO = LoginRequestDTO(
+            type: type,
+            accessToken: accessToken,
+            authorizationCode: authorizationCode
+        )
         
-        print("카카오 AccessToken: \(accessToken)")
-        
-        memberService.kaKaoLogin(data: requestDTO) { result in
+        memberService.SocialLogin(data: requestDTO) { [weak self] result in
             switch result {
             case .success(let response):
-                // AccessToken & RefreshToken을 Keychain에 저장
+                // AccessToken & RefreshToken 저장
                 KeychainHelper.shared.save(response.accessToken, forKey: "accessToken")
                 KeychainHelper.shared.save(response.refreshToken, forKey: "refreshToken")
                 
-                print("로그인 성공: \(response)")
+                print("\n로그인 성공: \(response)\n")
                 
-                // ✅ registerStatus 확인
-                if response.registerStatus == "REGISTERED" {
-                    DispatchQueue.main.async {
-                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                            sceneDelegate.switchToMain()
-                        } else {
-                            print("🚨 SceneDelegate를 찾을 수 없음")
-                        }
-                    }
-                } else if response.registerStatus == "AGREED_PROFILE_NOT_SET" {
-                    DispatchQueue.main.async {
-                        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-                            sceneDelegate.navigateToAddProfile()
-                        } else {
-                            print("🚨 SceneDelegate를 찾을 수 없음")
-                        }
-                    }
+                // 상태에 따른 화면 전환
+                DispatchQueue.main.async {
+                    self?.handleLoginResponse(status: response.registerStatus)
                 }
-                else {
-                    self.navigateToAgreement() // 약관 동의 화면으로 이동
-                }
-//                self.handleSuccessfulLogin()
-            
+                
             case .failure(let error):
-                if case .serverError(let statusCode, _) = error, statusCode == 4001 {
-                    self.reissueToken { reissueResult in
-                        switch reissueResult {
-                        case .success(let newTokens):
-                            // 새로운 액세스 토큰으로 다시 로그인 요청
-                            self.sendKakaoLoginRequest(accessToken: newTokens.accessToken)
-                        case .failure(let reissueError):
-                            print("토큰 재발급 실패: \(reissueError.localizedDescription)")
-                            self.errorMessage = reissueError.localizedDescription
-                        }
-                    }
-                } else {
-                    print("로그인 실패: \(error.localizedDescription)")
-                    self.errorMessage = error.localizedDescription
-                }
+                print("로그인 실패: \(error.localizedDescription)")
+                self?.errorMessage = error.localizedDescription
             }
         }
     }
 
+    // 회원가입 처리 로직
+    private func handleLoginResponse(status: String) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
+            print("SceneDelegate를 찾을 수 없음")
+            return
+        }
+        
+        switch status {
+        case "REGISTERED":
+            // 자동 로그인을 위한 키
+            UserDefaults.standard.set(true, forKey: "isLoggedIn")
+            print("자동로그인 ON")
+            sceneDelegate.switchToMain()
+        case "AGREED_PROFILE_NOT_SET":
+            sceneDelegate.navigateToAddProfile()
+        default:
+            navigateToAgreement()
+        }
+    }
+
     // 재발급
-    private func reissueToken(completion: @escaping (Result<KakaoLoginResponseDTO, Error>) -> Void) {
+    private func reissueToken(completion: @escaping (Result<LoginResponseDTO, Error>) -> Void) {
         guard let refreshToken = KeychainHelper.shared.get(forKey: "refreshToken") else {
             completion(.failure(NSError(domain: "TokenReissue", code: -1, userInfo: [NSLocalizedDescriptionKey: "리프레시 토큰 없음"])))
             return
@@ -263,3 +250,44 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         return presentationAnchor
     }
 }
+
+
+//if let jwtPayload = decodeJWT(response.accessToken) {
+//    print("여기 어세스 토큰이요: \(String(describing: accessToken))")
+//
+//    if let exp = jwtPayload["exp"] as? TimeInterval {
+//           let expirationDate = Date(timeIntervalSince1970: exp)
+//           print("JWT 만료 시간: \(expirationDate)")
+//       } else {
+//           print("JWT에 exp 필드가 없음")
+//       }
+//   } else {
+//       print("JWT 디코딩 실패")
+//   }
+//
+//func decodeJWT(_ jwt: String) -> [String: Any]? {
+//    let parts = jwt.split(separator: ".")
+//    guard parts.count > 1 else {
+//        print("JWT 형식이 잘못됨: \(jwt)")
+//        return nil
+//    }
+//    
+//    let payload = String(parts[1])
+//    var base64 = payload.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
+//
+//    while base64.count % 4 != 0 {
+//        base64.append("=")
+//    }
+//
+//    guard let data = Data(base64Encoded: base64) else {
+//        print("Base64 디코딩 실패: \(base64)")
+//        return nil
+//    }
+//
+//    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+//        print("JSON 파싱 실패")
+//        return nil
+//    }
+//
+//    return json
+//}

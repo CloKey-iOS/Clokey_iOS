@@ -26,14 +26,14 @@ public final class MembersService: NetworkManager {
     
     // MARK: - API funcs
     
-    // 카카오 로그인 POST API
-    public func kaKaoLogin(
-        data: KakaoLoginRequestDTO,
-        completion: @escaping (Result<KakaoLoginResponseDTO, NetworkError>) -> Void
+    // 소셜 로그인 POST API
+    public func SocialLogin(
+        data: LoginRequestDTO,
+        completion: @escaping (Result<LoginResponseDTO, NetworkError>) -> Void
     ) {
         request(
-            target: .kakaoLogin(data: data),
-            decodingType: KakaoLoginResponseDTO.self,
+            target: .SocialLogin(data: data),
+            decodingType: LoginResponseDTO.self,
             completion: completion
         )
     }
@@ -41,11 +41,11 @@ public final class MembersService: NetworkManager {
     // 토큰 재발급 POST API
     public func reissueToken(
         data: ReissueTokenRequestDTO,
-        completion: @escaping (Result<KakaoLoginResponseDTO, NetworkError>) -> Void
+        completion: @escaping (Result<LoginResponseDTO, NetworkError>) -> Void
     ) {
         request(
             target: .ReissueToken(data: data),
-            decodingType: KakaoLoginResponseDTO.self,
+            decodingType: LoginResponseDTO.self,
             completion: completion)
     }
     
