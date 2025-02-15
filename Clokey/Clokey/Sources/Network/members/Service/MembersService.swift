@@ -19,7 +19,8 @@ public final class MembersService: NetworkManager {
     public init(provider: MoyaProvider<MembersEndpoint>? = nil) {
         let plugins: [PluginType] = [
             NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)),
-            AccessTokenPlugin()
+            AccessTokenPlugin(),
+            TokenRefreshPlugin()
         ]
         self.provider = provider ?? MoyaProvider<MembersEndpoint>(plugins: plugins)
     }
@@ -83,9 +84,7 @@ public final class MembersService: NetworkManager {
             completion: completion
         )
     }
-//
-    
-    
+
     /// 아이디 중복 확인 GET API
     public func checkIdAvailability (
         checkId: String,

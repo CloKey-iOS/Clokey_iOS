@@ -50,6 +50,9 @@
 		074401AA2D5E1F9A00E60282 /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401A42D5E1F9A00E60282 /* ProfileRequest.swift */; };
 		074401AB2D5E1F9A00E60282 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401A52D5E1F9A00E60282 /* ProfileResponse.swift */; };
 		074401AE2D5E1F9A00E60282 /* AddClothingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401AC2D5E1F9A00E60282 /* AddClothingViewController.swift */; };
+		074401B02D5FB8C600E60282 /* JWTHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401AF2D5FB8C600E60282 /* JWTHelper.swift */; };
+		074401B22D5FBAC700E60282 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401B12D5FBAC700E60282 /* TokenManager.swift */; };
+		074401B42D5FC46400E60282 /* TokenRefreshPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074401B32D5FC46400E60282 /* TokenRefreshPlugin.swift */; };
 		0744FF822D5B1D4500E60282 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0744FF812D5B1D4500E60282 /* FirebaseAnalytics */; };
 		0744FF842D5B1D4500E60282 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 0744FF832D5B1D4500E60282 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		0744FF862D5B1D4500E60282 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0744FF852D5B1D4500E60282 /* FirebaseAuth */; };
@@ -79,7 +82,6 @@
 		07649C292D4DDD5D00B6B2B2 /* UpdateFriendCalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C252D4DDD5D00B6B2B2 /* UpdateFriendCalendarCollectionViewCell.swift */; };
 		07649C2A2D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C272D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift */; };
 		07649C2B2D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649C262D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift */; };
-		07649EE32D4DE58900B6B2B2 /* CookiePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649EAD2D4DE58900B6B2B2 /* CookiePlugin.swift */; };
 		07649EE42D4DE58900B6B2B2 /* MembersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649ED12D4DE58900B6B2B2 /* MembersService.swift */; };
 		07649EE52D4DE58900B6B2B2 /* MembersLoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649ECF2D4DE58900B6B2B2 /* MembersLoginResponseDTO.swift */; };
 		07649EE62D4DE58900B6B2B2 /* MembersLoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07649ECC2D4DE58900B6B2B2 /* MembersLoginRequestDTO.swift */; };
@@ -250,6 +252,9 @@
 		074401A42D5E1F9A00E60282 /* ProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequest.swift; sourceTree = "<group>"; };
 		074401A52D5E1F9A00E60282 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		074401AC2D5E1F9A00E60282 /* AddClothingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClothingViewController.swift; sourceTree = "<group>"; };
+		074401AF2D5FB8C600E60282 /* JWTHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTHelper.swift; sourceTree = "<group>"; };
+		074401B12D5FBAC700E60282 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		074401B32D5FC46400E60282 /* TokenRefreshPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefreshPlugin.swift; sourceTree = "<group>"; };
 		0744FF8B2D5B1D6900E60282 /* NewsImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsImageModel.swift; sourceTree = "<group>"; };
 		0744FF8C2D5B1D6900E60282 /* OpenWeatherMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherMap.swift; sourceTree = "<group>"; };
 		0744FF8D2D5B1D6900E60282 /* PickImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickImageModel.swift; sourceTree = "<group>"; };
@@ -275,7 +280,6 @@
 		07649C262D4DDD5D00B6B2B2 /* UpdateFriendClothesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFriendClothesCollectionViewCell.swift; sourceTree = "<group>"; };
 		07649C272D4DDD5D00B6B2B2 /* WeatherClothesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClothesCollectionViewCell.swift; sourceTree = "<group>"; };
 		07649EAB2D4DE58900B6B2B2 /* NetworkManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Extension.swift"; sourceTree = "<group>"; };
-		07649EAD2D4DE58900B6B2B2 /* CookiePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookiePlugin.swift; sourceTree = "<group>"; };
 		07649EAF2D4DE58900B6B2B2 /* NetworkManager+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Protocol.swift"; sourceTree = "<group>"; };
 		07649EB12D4DE58900B6B2B2 /* CommonReponseDTOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonReponseDTOs.swift; sourceTree = "<group>"; };
 		07649EB32D4DE58900B6B2B2 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
@@ -829,8 +833,8 @@
 		07649EAE2D4DE58900B6B2B2 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				07649EAD2D4DE58900B6B2B2 /* CookiePlugin.swift */,
 				07649FF92D4DEA9000B6B2B2 /* AccessTokenPlugin.swift */,
+				074401B32D5FC46400E60282 /* TokenRefreshPlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -1135,6 +1139,8 @@
 				A6548E522D3F47DE00F79B66 /* WeatherAPI.swift */,
 				076FAB4D2D2EBB3A00FF3979 /* KakaoAuthService.swift */,
 				07649FF72D4DE9AC00B6B2B2 /* KeychainHelper.swift */,
+				074401AF2D5FB8C600E60282 /* JWTHelper.swift */,
+				074401B12D5FBAC700E60282 /* TokenManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1665,7 +1671,6 @@
 				07649FFA2D4DEA9000B6B2B2 /* AccessTokenPlugin.swift in Sources */,
 				07E1CB5F2D36A10000F86BB8 /* CustomButton.swift in Sources */,
 				07E1CB602D36A10000F86BB8 /* CustomButtonTextField.swift in Sources */,
-				07649EE32D4DE58900B6B2B2 /* CookiePlugin.swift in Sources */,
 				07649EE42D4DE58900B6B2B2 /* MembersService.swift in Sources */,
 				0744FFD72D5B1DD500E60282 /* NewsView.swift in Sources */,
 				0744018F2D5E1F9A00E60282 /* lastAddView.swift in Sources */,
@@ -1685,12 +1690,15 @@
 				0744019D2D5E1F9A00E60282 /* ThickSlider.swift in Sources */,
 				0744019E2D5E1F9A00E60282 /* ThickViewController.swift in Sources */,
 				0744019F2D5E1F9A00E60282 /* AddClothesView.swift in Sources */,
+				074401B22D5FBAC700E60282 /* TokenManager.swift in Sources */,
+				074401B42D5FC46400E60282 /* TokenRefreshPlugin.swift in Sources */,
 				074401A02D5E1F9A00E60282 /* AddClothViewController.swift in Sources */,
 				A67661892D5B367B006AAB63 /* CustomBottomSheetViewController.swift in Sources */,
 				A676618A2D5B367B006AAB63 /* EditProfileView.swift in Sources */,
 				A676618B2D5B367B006AAB63 /* EditProfileViewController.swift in Sources */,
 				0744FFD82D5B1DD500E60282 /* ImageView.swift in Sources */,
 				07649EE52D4DE58900B6B2B2 /* MembersLoginResponseDTO.swift in Sources */,
+				074401B02D5FB8C600E60282 /* JWTHelper.swift in Sources */,
 				0744FFAC2D5B1D6900E60282 /* PickPopUpView.swift in Sources */,
 				A648ACDC2D5CECAC0094C126 /* CategoriesRequestDTO.swift in Sources */,
 				07649EE62D4DE58900B6B2B2 /* MembersLoginRequestDTO.swift in Sources */,

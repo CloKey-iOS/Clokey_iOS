@@ -28,7 +28,6 @@ final class LoginViewController: UIViewController {
     let memberService = MembersService()
 
     // 로그인 상태 및 에러 메시지 관리
-//    @Published private var isLoggedIn = false
     @Published private var errorMessage: String?
 
     // MARK: - Initialization
@@ -67,16 +66,6 @@ final class LoginViewController: UIViewController {
         action: #selector(appleLoginButtonTapped),
         for: .touchUpInside
     )
-
-    // 로그인 상태 변화 감지
-//    $isLoggedIn
-//        .receive(on: DispatchQueue.main)
-//        .sink { [weak self] isLoggedIn in
-//            if isLoggedIn {
-//                self?.navigateToAgreement()
-//            }
-//        }
-//        .store(in: &cancellables)
     }
     
     // MARK: - Actions
@@ -135,13 +124,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Helpers
     
-    // 로그인 성공
-//    private func handleSuccessfulLogin() {
-//        let isLoggedIn = UserDefaults.standard.set(true, forKey: "isLoggedIn")
-//        print("자동로그인 상태: \(isLoggedIn)\n")
-//    }
-    
-    //
+    // 약관동의로..
     private func navigateToAgreement() {
         guard let SceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
             fatalError("SceneDelegate not found")
@@ -250,44 +233,3 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         return presentationAnchor
     }
 }
-
-
-//if let jwtPayload = decodeJWT(response.accessToken) {
-//    print("여기 어세스 토큰이요: \(String(describing: accessToken))")
-//
-//    if let exp = jwtPayload["exp"] as? TimeInterval {
-//           let expirationDate = Date(timeIntervalSince1970: exp)
-//           print("JWT 만료 시간: \(expirationDate)")
-//       } else {
-//           print("JWT에 exp 필드가 없음")
-//       }
-//   } else {
-//       print("JWT 디코딩 실패")
-//   }
-//
-//func decodeJWT(_ jwt: String) -> [String: Any]? {
-//    let parts = jwt.split(separator: ".")
-//    guard parts.count > 1 else {
-//        print("JWT 형식이 잘못됨: \(jwt)")
-//        return nil
-//    }
-//    
-//    let payload = String(parts[1])
-//    var base64 = payload.replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
-//
-//    while base64.count % 4 != 0 {
-//        base64.append("=")
-//    }
-//
-//    guard let data = Data(base64Encoded: base64) else {
-//        print("Base64 디코딩 실패: \(base64)")
-//        return nil
-//    }
-//
-//    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-//        print("JSON 파싱 실패")
-//        return nil
-//    }
-//
-//    return json
-//}

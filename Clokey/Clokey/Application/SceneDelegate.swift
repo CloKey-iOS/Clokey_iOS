@@ -13,46 +13,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    // 앱의 화면이 처음 생성될 때 호출되는 메서드
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // 앱의 화면이 처음 생성될 때 호출되는 메서드.
-        
-        // 초기 화면 설정
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        
-        // 커스텀 예시
-//        let loginViewController = ViewController()
-//        let navigationController = UINavigationController(rootViewController: loginViewController)
-//        window?.rootViewController = navigationController
         
         let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
         print("현재 자동로그인 상태: \(isLoggedIn)")
         
         // 자동 로그인
         if isLoggedIn {
-            switchToMain()
+            // 임시 로딩 화면 생성
+            let tempLoadingView = UIViewController()
+            tempLoadingView.view.backgroundColor = .white
+            
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.center = tempLoadingView.view.center
+            indicator.startAnimating()
+            tempLoadingView.view.addSubview(indicator)
+            
+            window?.rootViewController = tempLoadingView
+            
+            TokenManager.shared.validateAndRefreshTokenIfNeeded { [weak self] isValid in
+                DispatchQueue.main.async {
+                    if isValid {
+                        self?.switchToMain()
+                    } else {
+                        self?.switchToLogin()
+                    }
+                }
+            }
         } else {
             let loginViewController = LoginViewController(coordinator: self)
             window?.rootViewController = loginViewController
         }
         
-        // 임시 자동 로그인 코드
-//         앱 실행 시, 바로 메인화면을 원하면 위 코드 대신 이 코드를 사용
-//        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-//
-//        if isLoggedIn {
-//            // 로그인 상태라면 메인 화면으로 이동
-//            let mainViewController = MainViewController()
-//            let navigationController = UINavigationController(rootViewController: mainViewController)
-//            window?.rootViewController = navigationController
-//        } else {
-//            // 비로그인 상태라면 로그인 화면 표시
-//            let loginViewController = LoginViewController(coordinator: self)
-//            let navigationController = UINavigationController(rootViewController: loginViewController)
-//            window?.rootViewController = navigationController
-//        }
-//
         window?.makeKeyAndVisible()
         
     }
@@ -85,8 +81,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // 씬이 백그라운드에서 포그라운드로 전환될 때 호출
     func sceneWillEnterForeground(_ scene: UIScene) {
-       
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        
+        if !isLoggedIn {
+            print("로그인 상태 아님 -> 토큰 검사 패스")
+            return
+        }
+
+        guard let accessToken = KeychainHelper.shared.get(forKey: "accessToken"),
+              let expirationDate = JWTHelper.shared.getTokenExpirationDate(from: accessToken) else {
+            self.switchToLogin() // 토큰이 없거나 만료 시간을 알 수 없으면 로그인 화면으로 이동
+            return
+        }
+
+        let timeRemaining = expirationDate.timeIntervalSince(Date())
+
+        print("Foreground 진입 - JWT 남은 시간: \(timeRemaining / 60)분")
+
+        if timeRemaining <= 10 * 60 { // 10분 이하 남았을 때 자동 갱신
+            print("토큰 만료 임박.. 즉시 재발급 ON!")
+            TokenManager.shared.validateAndRefreshTokenIfNeeded { isValid in
+                if !isValid {
+                    DispatchQueue.main.async {
+                        self.switchToLogin() // 갱신 실패 시 로그인 화면으로 전환
+                    }
+                }
+            }
+        }
     }
+
+
 
     // 씬이 포그라운드에서 백그라운드로 전환될 때 호출 (홈버튼 눌러서 나갈 때)
     func sceneDidEnterBackground(_ scene: UIScene) {

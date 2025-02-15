@@ -3,6 +3,9 @@
 <plist version="1.0">
 <dict>
     
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+
     <key>UIUserInterfaceStyle</key>
     <string>Light</string>
 
