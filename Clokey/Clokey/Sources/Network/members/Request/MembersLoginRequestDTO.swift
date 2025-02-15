@@ -14,7 +14,7 @@ public struct LoginRequestDTO: Codable {
     public let type: String
     public let accessToken: String?
     public let authorizationCode: String?
-//    public let deviceToken: String
+    public let deviceToken: String
 }
 
 // 토큰 재발급

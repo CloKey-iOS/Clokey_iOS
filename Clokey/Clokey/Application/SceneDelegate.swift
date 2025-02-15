@@ -19,38 +19,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-        print("현재 자동로그인 상태: \(isLoggedIn)")
-        
-        // 자동 로그인
-        if isLoggedIn {
-            // 임시 로딩 화면 생성
-            let tempLoadingView = UIViewController()
-            tempLoadingView.view.backgroundColor = .white
-            
-            let indicator = UIActivityIndicatorView(style: .large)
-            indicator.center = tempLoadingView.view.center
-            indicator.startAnimating()
-            tempLoadingView.view.addSubview(indicator)
-            
-            window?.rootViewController = tempLoadingView
-            
-            TokenManager.shared.validateAndRefreshTokenIfNeeded { [weak self] isValid in
-                DispatchQueue.main.async {
-                    if isValid {
-                        self?.switchToMain()
-                    } else {
-                        self?.switchToLogin()
-                    }
-                }
-            }
-        } else {
-            let loginViewController = LoginViewController(coordinator: self)
-            window?.rootViewController = loginViewController
-        }
-        
+        // 로티 뷰컨트롤러 설정
+        let lottieVC = LottieViewController(animationName: "Onboarding")
+        window?.rootViewController = lottieVC
         window?.makeKeyAndVisible()
         
+        // 애니메이션 완료 후 자동 로그인 체크
+        lottieVC.animationCompletionHandler = { [weak self] in
+            guard let self = self else { return }
+            // 자동 로그인 체크
+            let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+            print("현재 자동로그인 상태: \(isLoggedIn)")
+            
+            if isLoggedIn {
+                TokenManager.shared.validateAndRefreshTokenIfNeeded { [weak self] isValid in
+                    DispatchQueue.main.async {
+                        if isValid {
+                            self?.switchToMain()
+                        } else {
+                            self?.switchToLogin()
+                        }
+                    }
+                }
+            } else {
+                let loginViewController = LoginViewController(coordinator: self)
+                self.window?.rootViewController = loginViewController
+            }
+        }
     }
     
     // 카카오 로그인 처리를 위한 URL 처리

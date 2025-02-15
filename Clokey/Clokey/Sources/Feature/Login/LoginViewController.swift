@@ -29,6 +29,8 @@ final class LoginViewController: UIViewController {
 
     // 로그인 상태 및 에러 메시지 관리
     @Published private var errorMessage: String?
+    // fcm 디바이스 토큰
+    private let fcmToken = UserDefaults.standard.string(forKey: "fcmToken") ?? ""
 
     // MARK: - Initialization
     init(coordinator: Coordinator) {
@@ -75,7 +77,7 @@ final class LoginViewController: UIViewController {
         authService.handleKakaoLogin { [weak self] result in
             switch result {
             case .success(let accessToken):
-                self?.sendKakaoLoginRequest(accessToken: accessToken)
+                self?.sendKakaoLoginRequest(accessToken: accessToken, fcmToken: self?.fcmToken ?? "")
             case .failure(let error):
                 self?.errorMessage = error.localizedDescription
             }
@@ -94,8 +96,8 @@ final class LoginViewController: UIViewController {
     // MARK: - Social Login
     
     // 카카오 로그인
-    private func sendKakaoLoginRequest(accessToken: String) {
-        handleSocialLogin(type: "kakao", accessToken: accessToken)
+    private func sendKakaoLoginRequest(accessToken: String, fcmToken: String) {
+        handleSocialLogin(type: "kakao", accessToken: accessToken, fcmToken: fcmToken)
     }
     
     // 애플 로그인 요청 생성
@@ -119,7 +121,7 @@ final class LoginViewController: UIViewController {
         }
         print("Authorization Code: \(codeString)")
         
-        handleSocialLogin(type: "apple", authorizationCode: codeString)
+        handleSocialLogin(type: "apple", authorizationCode: codeString, fcmToken: fcmToken)
     }
 
     // MARK: - Helpers
@@ -136,11 +138,12 @@ final class LoginViewController: UIViewController {
     // MARK: - API
     
     // 공동 로그인 처리
-    private func handleSocialLogin(type: String, accessToken: String? = nil, authorizationCode: String? = nil) {
+    private func handleSocialLogin(type: String, accessToken: String? = nil, authorizationCode: String? = nil, fcmToken: String? = nil) {
         let requestDTO = LoginRequestDTO(
             type: type,
             accessToken: accessToken,
-            authorizationCode: authorizationCode
+            authorizationCode: authorizationCode,
+            deviceToken: fcmToken ?? ""
         )
         
         memberService.SocialLogin(data: requestDTO) { [weak self] result in

@@ -72,7 +72,7 @@ public final class ClothesService : NetworkManager {
         data: AddClothesRequestDTO, image: UIImage, completion: @escaping (Result<Moya.Response, MoyaError>) -> Void
     ){
             guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-                print("🚨 이미지 변환 실패")
+                print("이미지 변환 실패")
                 return
             }
             
@@ -80,11 +80,11 @@ public final class ClothesService : NetworkManager {
                 switch result {
                 case .success(let response):
                     if let jsonString = String(data: response.data, encoding: .utf8) {
-                        print("🚀 서버 응답 JSON: \(jsonString)")
+                        print("서버 응답 JSON: \(jsonString)")
                     }
                     completion(.success(response))
                 case .failure(let error):
-                    print("🚨 요청 실패: \(error.localizedDescription)")
+                    print("요청 실패: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
